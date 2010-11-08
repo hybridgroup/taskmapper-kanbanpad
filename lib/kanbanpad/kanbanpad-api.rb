@@ -31,13 +31,9 @@ module KanbanpadAPI
   end
   
   class Base < ActiveResource::Base
-    self.site = "http://localhost:9292/api/v1/"
+    self.site = "http://www.kanbanpad.com/api/v1/"
     def self.inherited(base)
       KanbanpadAPI.resources << base
-      class << base
-        attr_accessor :site_format
-      end
-      base.site_format = '%s'
       super
     end
   end
@@ -61,31 +57,31 @@ module KanbanpadAPI
   class Project < Base
     def tickets(options = {})
       Task.find(:all, :params => options.update(:slug => slug))
-	end
+    end
 	
-	def steps(options = {})
-	  Step.find(:all, :params => options.update(:slug => slug))
-	end
+    def steps(options = {})
+      Step.find(:all, :params => options.update(:slug => slug))
+    end
   end
-  
+
   class Task < Base
     self.site += 'projects/:slug'
 	
-	def self.finished(project_id, options = {})
+    def self.finished(project_id, options = {})
       find(:all, :params => options.merge(:slug => project_id), :from => :finished)
-	end
-	
-	def self.backlog(project_id, options = {})
+    end
+
+    def self.backlog(project_id, options = {})
       find(:all, :params => options.merge(:slug => project_id), :from => :backlog)
-	end
+    end
   end
-  
+
   class Step < Base
     self.site += 'projects/:slug'
 	
-	def tickets(options = {})
-	  Task.find(:all, :params => options.merge(prefix_options).update(:q => %{slug:"#{project_id}"}))
-	end
+    def tickets(options = {})
+      Task.find(:all, :params => options.merge(prefix_options).update(:q => %{slug:"#{project_id}"}))
+    end
   end
   
  end
