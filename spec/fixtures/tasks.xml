@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tasks type="array">
   <task>
+    <id>4cd428c496f0734eef000007</id>
     <title>Configure app</title>
     <assigned_to>jhon</assigned_to>
     <note></note>
     <wip type="boolean">false</wip>
     <project_slug>7e2cad4b3cbe5954950c</project_slug>
-    <status>Released</status>
+    <backlog>false</backlog>
+    <finished>false</finished>
   </task>
   <task>
-    <title>Configure app</title>
+    <id>4cd428c496f0734eef000008</id>
+    <title>Fix issue</title>
     <assigned_to>james</assigned_to>
     <note></note>
     <wip type="boolean">false</wip>
     <project_slug>7e2cad4b3cbe5954950c</project_slug>
-    <status>Released</status>
+    <backlog>false</backlog>
+    <finished>true</finished>
   </task>
 </tasks>

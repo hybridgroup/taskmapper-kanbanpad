@@ -1,10 +1,11 @@
 module TicketMaster::Provider
-  module Yoursystem
-    # Project class for ticketmaster-yoursystem
+  module Kanbanpad
+    # Project class for ticketmaster-kanbanpad
     # 
     # 
     class Project < TicketMaster::Provider::Base::Project
       # declare needed overloaded methods here
+	  API = KanbanpadAPI::Project
       
       
       # copy from this.copy(that) copies that into this

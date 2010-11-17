@@ -1,6 +1,6 @@
 module TicketMaster::Provider
-  module Yoursysten
-    # The comment class for ticketmaster-yoursystem
+  module Kanbanpad
+    # The comment class for ticketmaster-kanbanpad
     #
     # Do any mapping between Ticketmaster and your system's comment model here
     # versions of the ticket.

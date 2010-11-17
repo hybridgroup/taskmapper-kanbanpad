@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<task>
-  <title>Configure app</title>
-  <assigned-to type="array">
-    <names>jhon, james</names>
-  </assigned-to>
-  <note></note>
-  <wip type="boolean">false</wip>
-</task>

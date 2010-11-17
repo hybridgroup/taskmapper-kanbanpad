@@ -1,10 +1,11 @@
 module TicketMaster::Provider
-  module Yoursystem
-    # Ticket class for ticketmaster-yoursystem
+  module Kanbanpad
+    # Ticket class for ticketmaster-kanbanpad
     #
     
     class Ticket < TicketMaster::Provider::Base::Ticket
       # declare needed overloaded methods here
+      API = KanbanpadAPI::Task
       
     end
   end

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<task>
-  <title>Fix bug</title>
-  <assigned-to type="array">
-    <names>chris</names>
-  </assigned-to>
-  <note></note>
-  <wip type="boolean">false</wip>
-</task>

@@ -2,7 +2,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'rubygems'
 require 'ticketmaster'
-require '~/ticketmaster_project/ticketmaster-kanbanpad/lib/ticketmaster-kanbanpad'
+require 'ticketmaster-kanbanpad'
 require 'spec'
 require 'spec/autorun'
 

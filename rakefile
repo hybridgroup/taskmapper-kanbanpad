@@ -8,7 +8,7 @@ begin
     gem.summary = %Q{Ticketmaster Provider for Kanbanpad}
     gem.description = %Q{Allows ticketmaster to interact with kanbanpad.}
     gem.email = "youremail"
-    gem.homepage = "your homepage url"
+    gem.homepage = "http://github.com/hybridgroup/ticketmaster-kanbanpad"
     gem.authors = ["You"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.add_dependency "ticketmaster", ">= 0.1.0"
@@ -43,7 +43,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "ticketmaster-yourprovider #{version}"
+  rdoc.title = "ticketmaster-kanbanpad #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
