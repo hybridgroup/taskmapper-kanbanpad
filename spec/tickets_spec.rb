@@ -1,5 +1,56 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
-  it "should have specs for tickets"
+  before(:all) do
+    headers = {}
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0.xml', headers, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.xml', headers, fixture_for('tasks'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.xml', headers, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+    end
+    @project_id = 'be74b643b64e3dc79aa0'
+    @ticket_id = '4cd428c496f0734eef000007'
+  end
+
+  before(:each) do
+    @ticketmaster = TicketMaster.new(:kanbanpad, {})
+    @project = @ticketmaster.project(@project_id)
+    @klass = TicketMaster::Provider::Kanbanpad::Ticket
+    @comment_klass = TicketMaster::Provider::Kanbanpad::Comment
+  end
+
+  it "should be able to load all tickets" do
+    @project.tickets.should be_an_instance_of(Array)
+    @project.tickets.first.should be_an_instance_of(@klass)
+  end
+  
+  it "should be able to load all tickets based on an array of ids" do
+    @tickets = @project.tickets([@ticket_id])
+    @tickets.should be_an_instance_of(Array)
+    @tickets.first.should be_an_instance_of(@klass)
+    @tickets.first.id.should == @ticket_id
+  end
+  
+  it "should be able to load all tickets based on attributes" do
+    @tickets = @project.tickets(:id => @ticket_id)
+    @tickets.should be_an_instance_of(Array)
+    @tickets.first.should be_an_instance_of(@klass)
+    @tickets.first.id.should == @ticket_id
+  end
+  
+  it "should return the ticket class" do
+    @project.ticket.should == @klass
+  end
+  
+  it "should be able to load a single ticket" do
+    @ticket = @project.ticket(@ticket_id)
+    @ticket.should be_an_instance_of(@klass)
+    @ticket.id.should == @ticket_id
+  end
+  
+  it "should be able to load a single ticket based on attributes" do
+    @ticket = @project.ticket(:id => @ticket_id)
+    @ticket.should be_an_instance_of(@klass)
+    @ticket.id.should == @ticket_id
+  end
 end

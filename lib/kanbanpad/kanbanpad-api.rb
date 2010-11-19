@@ -55,17 +55,17 @@ module KanbanpadAPI
   #
   
   class Project < Base
-    def tickets(options = {})
-      Task.find(:all, :params => options.update(:slug => slug))
+    def tasks(options = {})
+      Task.find(:all, :params => options.update(:project_id => slug))
     end
 	
     def steps(options = {})
-      Step.find(:all, :params => options.update(:slug => slug))
+      Step.find(:all, :params => options.update(:project_id => slug))
     end
   end
 
   class Task < Base
-    self.site += 'projects/:slug'
+    self.site += 'projects/:project_id/'
 	
     def self.finished(project_id, options = {})
       find(:all, :params => options.merge(:slug => project_id), :from => :finished)
@@ -74,10 +74,14 @@ module KanbanpadAPI
     def self.backlog(project_id, options = {})
       find(:all, :params => options.merge(:slug => project_id), :from => :backlog)
     end
+
+    def comments
+      self.note
+    end
   end
 
   class Step < Base
-    self.site += 'projects/:slug'
+    self.site += 'projects/:project_id/'
 	
     def tickets(options = {})
       Task.find(:all, :params => options.merge(prefix_options).update(:q => %{slug:"#{project_id}"}))

@@ -2,6 +2,7 @@
 <projects type="array">
   <project>
     <email>sonia@g.com</email>
+    <id>7e2cad4b3cbe5954950c</id>
     <slug>7e2cad4b3cbe5954950c</slug>
     <name>project1</name>
     <wip_limit>10</wip_limit>
@@ -11,6 +12,7 @@
   </project>
   <project>
     <email>jhon@g.com</email>
+    <id>be74b643b64e3dc79aa0</id>
     <slug>be74b643b64e3dc79aa0</slug>
     <name>project2</name>
     <wip_limit>10</wip_limit>

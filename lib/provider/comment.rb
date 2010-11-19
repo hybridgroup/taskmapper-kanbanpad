@@ -5,6 +5,7 @@ module TicketMaster::Provider
     # Do any mapping between Ticketmaster and your system's comment model here
     # versions of the ticket.
     #
+    # Not supported by Kanbanpad API
     class Comment < TicketMaster::Provider::Base::Comment
       # declare needed overloaded methods here
       

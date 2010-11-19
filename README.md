@@ -1,12 +1,12 @@
 # ticketmaster-kanbanpad
 
-This is the provider for interaction with (kanbanpad)[http://www.kanbanpad.com] using (ticketmaster)[http://ticketrb.com]
+This is the provider for interaction with [kanbanpad](http://www.kanbanpad.com) using [ticketmaster](http://ticketrb.com)
 
 # Usage
 
 Initialize the kanbanpad ticketmaster instance using a username and api key:
   
-    kanbanpad = TicketMaster.new(:kanbanpad, :username => 'you', :password => 'pass')
+    kanbanpad = TicketMaster.new(:kanbanpad, :username => 'you', :password => 'api_key')
 
 
 ## Requirements
