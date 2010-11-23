@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'ticketmaster'
 require 'active_support'
 require 'active_resource'
 
