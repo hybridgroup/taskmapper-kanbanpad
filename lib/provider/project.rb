@@ -6,9 +6,6 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       # declare needed overloaded methods here
       API = KanbanpadAPI::Project
-	  
-      alias_method :tasks, :tickets
-      alias_method :task, :ticket
 
       # copy from this.copy(that) copies that into this
       def copy(project)
@@ -21,6 +18,27 @@ module TicketMaster::Provider
         end
       end
 
+      def id
+        self[:slug]
+      end
+
+      def created_at
+        begin
+          Time.parse(self[:created_at])
+        rescue
+          self[:created_at]
+        end
+      end
+
+      def updated_at
+        begin
+          Time.parse(self[:updated_at])
+        rescue
+          self[:updated_at]
+        end
+      end
+
+      
     end
   end
 end
