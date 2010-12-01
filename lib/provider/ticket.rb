@@ -21,6 +21,30 @@ module TicketMaster::Provider
         self.project_slug
       end
 
+      def created_at
+        if self[:created_at].blank?
+          Time.now #kanbanpad used to not track the created_at
+        else
+          begin
+            Time.parse(self[:created_at])
+          rescue
+            self[:created_at]
+          end
+        end
+      end
+
+      def updated_at
+        if self[:updated_at].blank?
+          Time.now #kanbanpad used to not track the created_at
+        else
+          begin
+            Time.parse(self[:updated_at])
+          rescue
+            self[:updated_at]
+          end
+        end
+      end
+
       #TODO?
       def comments
         warn 'Kanbanpad does not have comments. Perhaps you should leave feedback to request it?'
