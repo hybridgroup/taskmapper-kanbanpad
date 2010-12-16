@@ -23,7 +23,7 @@ module TicketMaster::Provider
 
       def created_at
         if self[:created_at].blank?
-          Time.now #kanbanpad used to not track the created_at
+          Time.parse('2010-03-25 3:06:34') #kanbanpad used to not track the created_at
         else
           begin
             Time.parse(self[:created_at])
@@ -35,7 +35,7 @@ module TicketMaster::Provider
 
       def updated_at
         if self[:updated_at].blank?
-          Time.now #kanbanpad used to not track the created_at
+          Time.parse('2010-03-25 3:06:34') #kanbanpad used to not track the updated_at
         else
           begin
             Time.parse(self[:updated_at])
