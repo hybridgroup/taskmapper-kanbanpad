@@ -62,6 +62,10 @@ module KanbanpadAPI
     def steps(options = {})
       Step.find(:all, :params => options.update(:project_id => slug))
     end
+
+    def comments(options = {})
+      ProjectComment.find(:all, :params => options.update(:project_id => slug))
+    end
   end
 
   class Task < Base
@@ -75,8 +79,8 @@ module KanbanpadAPI
       find(:all, :params => options.merge(:slug => project_id), :from => :backlog)
     end
 
-    def comments
-      self.note
+    def comments(options = {})
+      TaskComment.find(:all, :params => options.merge(prefix_options).update(:id => id))
     end
   end
 
@@ -84,8 +88,17 @@ module KanbanpadAPI
     self.site += 'projects/:project_id/'
 	
     def tickets(options = {})
-      Task.find(:all, :params => options.merge(prefix_options).update(:q => %{slug:"#{project_id}"}))
+      Task.find(:all, :params => options.merge(prefix_options))
     end
   end
-  
+ 
+  class ProjectComment < Base
+    self.site += 'projects/:project_id/'
+    self.element_name = 'comment'
+  end 
+
+  class TaskComment < Base
+    self.site += 'projects/:project_id/tasks/:id'
+    self.element_name = 'comment'
+  end
  end
