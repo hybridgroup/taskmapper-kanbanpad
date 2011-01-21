@@ -2,18 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
   before(:all) do
-    headers = {}
+    headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
+    wheaders = headers.merge('Accept' => 'application/json')
     ActiveResource::HttpMock.respond_to do |mock|
-      mock.get '/api/v1/projects/be74b643b64e3dc79aa0.xml', headers, fixture_for('projects/be74b643b64e3dc79aa0'), 200
-      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.xml', headers, fixture_for('tasks'), 200
-      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.xml', headers, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', wheaders, fixture_for('tasks'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
     end
     @project_id = 'be74b643b64e3dc79aa0'
     @ticket_id = '4cd428c496f0734eef000007'
   end
 
   before(:each) do
-    @ticketmaster = TicketMaster.new(:kanbanpad, {})
+    @ticketmaster = TicketMaster.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
     @project = @ticketmaster.project(@project_id)
     @klass = TicketMaster::Provider::Kanbanpad::Ticket
     @comment_klass = TicketMaster::Provider::Kanbanpad::Comment
