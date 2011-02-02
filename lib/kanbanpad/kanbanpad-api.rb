@@ -98,7 +98,7 @@ module KanbanpadAPI
   end 
 
   class TaskComment < Base
-    self.site += 'projects/:project_id/tasks/:id'
+    self.site += 'projects/:project_id/tasks/:task_id'
     self.element_name = 'comment'
   end
  end

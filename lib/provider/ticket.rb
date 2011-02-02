@@ -46,20 +46,14 @@ module TicketMaster::Provider
       end
 
       #TODO?
-      def comments
-        warn 'Kanbanpad does not have comments. Perhaps you should leave feedback to request it?'
-        []
-      end
-
-      #TODO?
       def comment
-        warn 'Kanbanpad does not have comments. Perhaps you should leave feedback to request it?'
+        warn 'Kanbanpad does not allow find by id of comments. Perhaps you should leave feedback to request it?'
         nil
       end
 
-      #TODO?
+      #TODO? Exists...need to hook this up and test
       def comment!
-        warn 'Kanbanpad does not have comments. Perhaps you should leave feedback to request it?'
+        warn 'Perhaps you should leave feedback to request it?'
         []
       end
       
