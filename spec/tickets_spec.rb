@@ -27,14 +27,14 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
   end
   
   it "should be able to load all tickets based on an array of ids" do
-    @tickets = @project.tickets(['4d62b952faf6426596000061'])
+    @tickets = @project.tickets([@ticket_id])
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
     @tickets.first.id.should == '4cd428c496f0734eef000007'
   end
   
   it "should be able to load all tickets based on attributes" do
-    @tickets = @project.tickets(:id => '4d62b952faf6426596000061')
+    @tickets = @project.tickets(:id => @ticket_id)
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
     @tickets.first.id.should == '4cd428c496f0734eef000007'
