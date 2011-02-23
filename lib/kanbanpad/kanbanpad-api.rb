@@ -55,7 +55,7 @@ module KanbanpadAPI
   #
   
   class Project < Base
-    def tasks(options = {})
+    def tickets(options = {})
       Task.find(:all, :params => options.update(:project_id => slug, :backlog => 'yes', :finished => 'yes'))
     end
 	
@@ -88,7 +88,6 @@ module KanbanpadAPI
     self.site += 'projects/:project_id/'
 	
     def tickets(options = {})
-      options.merge!(:finished => 'yes', :backlog => 'yes')
       Task.find(:all, :params => options.merge(prefix_options))
     end
   end
