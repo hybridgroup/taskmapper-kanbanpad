@@ -38,6 +38,37 @@ module TicketMaster::Provider
         end
       end
 
+      # TODO: Needs refactor
+      def tickets(*options)
+        if options.empty?
+          collect_all_tickets          
+        elsif options.first.is_a? Array
+          collect_all_tickets.select do |ticket| 
+            if options.first.any? {|id| id == ticket.id }
+              ticket
+            end
+          end
+        elsif options.first.is_a? Hash
+          collect_all_tickets.select do |ticket|
+            options.first.inject(true) do |memo, kv|
+              break unless memo
+              key, value = kv
+              begin
+                memo &= ticket.send(key) == value
+              rescue NoMethodError
+                memo = false
+              end
+              memo
+            end
+          end
+        end
+      end
+
+      private
+      def collect_all_tickets
+        API.tickets(id).collect { |ticket| Ticket.new ticket }
+      end
+
     end
   end
 end

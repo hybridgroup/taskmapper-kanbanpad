@@ -7,6 +7,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', wheaders, fixture_for('tasks'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', wheaders, fixture_for('all'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
     end
     @project_id = 'be74b643b64e3dc79aa0'
@@ -26,17 +27,17 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
   end
   
   it "should be able to load all tickets based on an array of ids" do
-    @tickets = @project.tickets([@ticket_id])
+    @tickets = @project.tickets(['4d62b952faf6426596000061'])
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == @ticket_id
+    @tickets.first.id.should == '4d62b952faf6426596000061'
   end
   
   it "should be able to load all tickets based on attributes" do
-    @tickets = @project.tickets(:id => @ticket_id)
+    @tickets = @project.tickets(:id => '4d62b952faf6426596000061')
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
-    @tickets.first.id.should == @ticket_id
+    @tickets.first.id.should == '4d62b952faf6426596000061'
   end
   
   it "should return the ticket class" do
