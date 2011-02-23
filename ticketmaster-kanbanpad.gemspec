@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ticketmaster-kanbanpad}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = %q{2011-02-01}
+  s.date = %q{2011-02-23}
   s.description = %q{Allows ticketmaster to interact with kanbanpad.}
   s.email = %q{sonia@hybridgroup.com}
   s.extra_rdoc_files = [
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/ticketmaster-kanbanpad.rb",
     "rakefile",
     "spec/comments_spec.rb",
+    "spec/fixtures/all.json",
     "spec/fixtures/projects.json",
     "spec/fixtures/projects.xml",
     "spec/fixtures/projects/be74b643b64e3dc79aa0.json",
