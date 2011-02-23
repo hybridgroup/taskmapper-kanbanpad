@@ -56,7 +56,7 @@ module KanbanpadAPI
   
   class Project < Base
 
-    def self.tickets(slug, options = {})
+    def self.tickets(slug, options = {}) 
       Task.find(:all, :params => options.update(:project_id => slug, :backlog => 'yes', :finished => 'yes'))
     end
 	
