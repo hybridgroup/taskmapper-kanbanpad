@@ -3,7 +3,7 @@ module TicketMaster::Provider
   
   module Kanbanpad
     include TicketMaster::Provider::Base
-	  TICKET_API = KanbanpadAPI::Task
+    TICKET_API = KanbanpadAPI::Task
     PROJECT_API = KanbanpadAPI::Project
     
     # This is for cases when you want to instantiate using TicketMaster::Provider::Kanbanpad.new(auth)
@@ -20,6 +20,6 @@ module TicketMaster::Provider
       end
       ::KanbanpadAPI.authenticate((auth.username.blank? ? auth.email : auth.username), (auth.password.blank? ? auth.token : auth.password))
     end
-    
+
   end
 end
