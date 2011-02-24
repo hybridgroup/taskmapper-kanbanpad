@@ -34,11 +34,11 @@ module TicketMaster::Provider
       end
 
       def self.find_by_attributes(project_id, attributes = {})
-        self.search(project_id, attributes)
+        search_by_attribute(self.search(project_id, attributes), attributes)
       end
 
       def self.search(project_id, options = {}, limit = 1000)
-        tickets = API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |ticket|
+        API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |ticket|
           self.new ticket
         end
       end
