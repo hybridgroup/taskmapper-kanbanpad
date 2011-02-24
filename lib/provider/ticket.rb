@@ -29,10 +29,6 @@ module TicketMaster::Provider
         end
       end
 
-      def self.find_by_id(project_id, id)
-        self.search(project_id, {'id' => id}).first
-      end
-
       def self.find_by_attributes(project_id, attributes = {})
         search_by_attribute(self.search(project_id, attributes), attributes)
       end
@@ -55,6 +51,14 @@ module TicketMaster::Provider
         end
       end
 
+      def self.create(*options)
+        begin
+          self.new API.new(options.first)
+        rescue
+          
+        end
+      end
+
       #TODO?
       def comment
         warn 'Kanbanpad does not allow find by id of comments. Perhaps you should leave feedback to request it?'
@@ -66,7 +70,7 @@ module TicketMaster::Provider
         warn 'Perhaps you should leave feedback to request it?'
         []
       end
-      
+
     end
   end
 end

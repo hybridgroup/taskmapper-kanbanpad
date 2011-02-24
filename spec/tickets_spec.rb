@@ -4,6 +4,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
+    post_data = {:tasks => {:title => 'new ticket'}}
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', wheaders, fixture_for('tasks'), 200
@@ -55,4 +56,5 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
   end
+
 end
