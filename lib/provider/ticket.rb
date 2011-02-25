@@ -52,11 +52,9 @@ module TicketMaster::Provider
       end
 
       def self.create(*options)
-        begin
-          self.new API.new(options.first)
-        rescue
-          
-        end
+        ticket = API.new(options.first)
+        ticket.save
+        self.new ticket
       end
 
       #TODO?
