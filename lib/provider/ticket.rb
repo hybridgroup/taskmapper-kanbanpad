@@ -17,6 +17,10 @@ module TicketMaster::Provider
         self.assigned_to.first
       end
 
+      def project_id
+        self.project_slug
+      end
+
       def created_at
         if self[:created_at].blank?
           Time.parse('2010-03-25 3:06:34') #kanbanpad used to not track the created_at
@@ -30,11 +34,11 @@ module TicketMaster::Provider
       end
 
       def self.find_by_attributes(project_id, attributes = {})
-        search_by_attribute(self.search(project_id, attributes), attributes)
+        self.search_by_attribute(self.search(project_id), attributes)
       end
 
       def self.search(project_id, options = {}, limit = 1000)
-        API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |ticket|
+        tickets = API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |ticket|
           self.new ticket
         end
       end

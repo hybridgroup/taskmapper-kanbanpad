@@ -11,12 +11,15 @@ module TicketMaster::Provider
       API = KanbanpadAPI::TaskComment
       
       def self.find_by_id(project_id, ticket_id, id)
-        self.new KanbanpadAPI::TaskComment.find(id, :params => {:project_id => project_id, :task_id => ticket_id})
+        self.search(project_id, ticket_id).select { |ticket| ticket.id == id }.first
+      end
+
+      def self.find_by_attributes(project_id, ticket_id, attributes = {})
+        search_by_attribute(self.search(project_id, ticket_id), attributes)
       end
 
       def self.search(project_id, ticket_id, options = {}, limit = 1000)
-        comments = KanbanpadAPI::TaskComment.find(:all, :params => {:project_id => project_id, :task_id => ticket_id}).collect { |comment| self.new comment }
-        search_by_attribute(comments, options, limit)
+        comments = API.find(:all, :params => {:project_id => project_id, :task_id => ticket_id}).collect { |comment| self.new comment }
       end
 
       def updated_at
