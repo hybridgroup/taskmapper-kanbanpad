@@ -55,12 +55,6 @@ module TicketMaster::Provider
         end
       end
 
-      def self.create(*options)
-        ticket = API.new(options.first)
-        ticket.save
-        self.new ticket
-      end
-
       #TODO?
       def comment
         warn 'Kanbanpad does not allow find by id of comments. Perhaps you should leave feedback to request it?'
