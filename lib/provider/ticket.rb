@@ -33,6 +33,13 @@ module TicketMaster::Provider
         end
       end
 
+      def self.create(*options)
+        if options.first.is_a? Hash
+          ticket = API.new(options.first)
+          ticket.save
+        end
+      end
+
       def self.find_by_attributes(project_id, attributes = {})
         self.search_by_attribute(self.search(project_id), attributes)
       end
