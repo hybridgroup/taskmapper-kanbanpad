@@ -37,6 +37,7 @@ module TicketMaster::Provider
         if options.first.is_a? Hash
           ticket = API.new(options.first)
           ticket.save
+          self.new ticket
         end
       end
 
