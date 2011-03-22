@@ -35,9 +35,10 @@ module TicketMaster::Provider
 
       def self.create(*options)
         if options.first.is_a? Hash
-          ticket = API.new(options.first)
-          ticket.save
-          self.new ticket
+          task = API.new(options.first)
+          ticket = self.new task
+          task.save
+          ticket
         end
       end
 
