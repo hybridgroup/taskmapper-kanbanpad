@@ -1,6 +1,6 @@
 # ticketmaster-kanbanpad
 
-This is the provider for interaction with [kanbanpad](http://www.kanbanpad.com) using [ticketmaster](http://ticketrb.com)
+This is the provider for interaction with [kanbanpad](https://www.kanbanpad.com) using [ticketmaster](http://ticketrb.com)
 
 # Usage
 
@@ -36,4 +36,4 @@ If you see or find any issues, feel free to open up an issue report.
 
 ## Copyright
 
-Copyright (c) 2010 The Hybrid Group. See LICENSE for details.
+Copyright (c) 2010-2011 The Hybrid Group. See LICENSE for details.
