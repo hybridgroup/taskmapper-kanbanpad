@@ -57,4 +57,10 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     @ticket.id.should == @ticket_id
   end
 
+  it "should return step status for a giving ticket" do 
+    @ticket = @project.ticket(@ticket_id)
+    puts @ticket.inspect
+    @ticket.status.should == ''
+  end
+
 end
