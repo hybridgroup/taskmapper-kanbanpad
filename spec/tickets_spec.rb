@@ -10,6 +10,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', wheaders, fixture_for('tasks'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', wheaders, fixture_for('tasks'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040.json', wheaders, fixture_for('steps/4dc312f49bd0ff6c37000040'), 200
     end
     @project_id = 'be74b643b64e3dc79aa0'
     @ticket_id = '4cd428c496f0734eef000007'
