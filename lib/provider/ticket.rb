@@ -35,6 +35,7 @@ module TicketMaster::Provider
 
       def self.create(*options)
         if options.first.is_a? Hash
+          options.first.merge!(:assigned_to => options.delete('assignee'))
           task = API.new(options.first)
           ticket = self.new task
           task.save
