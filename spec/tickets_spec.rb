@@ -59,7 +59,6 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
 
   it "should return step status for a giving ticket" do 
     @ticket = @project.ticket(@ticket_id)
-    puts @ticket.inspect
     @ticket.status.should == ''
   end
 
