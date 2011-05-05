@@ -7,7 +7,7 @@ module TicketMaster::Provider
       STEP_API = KanbanpadAPI::Step
 
       def status
-        step_name = STEP_API.find(:first, :params => {:project_id => self.project_id, :step_id => self.step_id})
+        step_name = STEP_API.find(self.step_id, :params => {:project_id => self.project_id})
         self.wip? ? 'in-progress' : 'queue'
       end
 

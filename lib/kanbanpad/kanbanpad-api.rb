@@ -86,8 +86,8 @@ module KanbanpadAPI
   end
 
   class Step < Base
-    self.site += 'projects/:project_id/steps/:step_id'
-	
+    self.site += 'projects/:project_id/'
+
     def tickets(options = {})
       Task.find(:all, :params => options.merge(prefix_options))
     end
