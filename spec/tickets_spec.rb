@@ -60,7 +60,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
 
   it "should return step status for a giving ticket" do 
     @ticket = @project.ticket(@ticket_id)
-    @ticket.status.should == ''
+    @ticket.status.should == 'Planning - In-Progress'
   end
 
 end
