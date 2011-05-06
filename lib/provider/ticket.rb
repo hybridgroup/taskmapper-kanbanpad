@@ -7,6 +7,8 @@ module TicketMaster::Provider
       STEP_API = KanbanpadAPI::Step
 
       def status
+        return "Finished" if self.finished
+        return "Backlog" if self.backlog
         self.wip? ? "#{step_name} - In-Progress" : "#{step_name} - Queue"
       end
 
@@ -37,7 +39,7 @@ module TicketMaster::Provider
       def self.create(*options)
         if options.first.is_a? Hash
           options.first.merge!(:assigned_to => options.first.delete('assignee'),
-                              :note => options.first[:description])
+                               :note => options.first[:description])
           task = API.new(options.first)
           ticket = self.new task
           task.save
