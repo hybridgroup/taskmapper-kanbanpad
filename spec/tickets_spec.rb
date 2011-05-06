@@ -14,6 +14,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     end
     @project_id = 'be74b643b64e3dc79aa0'
     @ticket_id = '4cd428c496f0734eef000007'
+    @ticket_id_without_assignee = '4dc31c4c9bd0ff6c3700004e'
   end
 
   before(:each) do
@@ -56,6 +57,10 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     @ticket = @project.ticket(:id => @ticket_id)
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
+  end
+
+  it "should return nobody as assignee for an empty assignee from the api" do 
+    @ticket = @project.ticket(@ticket_id_without_assignee)
   end
 
 end
