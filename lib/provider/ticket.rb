@@ -17,7 +17,7 @@ module TicketMaster::Provider
       end
 
       def assignee
-        self.assigned_to.empty? ? 'nobody' : self.assigned_to.first
+        self.assigned_to.empty? ? 'Nobody' : self.assigned_to.first
       end
 
       def project_id

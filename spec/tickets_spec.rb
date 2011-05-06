@@ -62,7 +62,7 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
 
   it "should return nobody as assignee for an empty assignee from the api" do 
     @ticket = @project.ticket(@ticket_id_without_assignee)
-    @ticket.assignee.should == 'nobody'
+    @ticket.assignee.should == 'Nobody'
   end
 
 end
