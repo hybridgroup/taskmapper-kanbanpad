@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ticketmaster-kanbanpad}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
     "spec/fixtures/projects/be74b643b64e3dc79aa0.json",
     "spec/fixtures/projects/be74b643b64e3dc79aa0.xml",
     "spec/fixtures/projects/create.xml",
+    "spec/fixtures/steps/4dc312f49bd0ff6c37000040.json",
     "spec/fixtures/tasks.json",
     "spec/fixtures/tasks.xml",
     "spec/fixtures/tasks/4cd428c496f0734eef000007.json",
@@ -51,7 +52,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = %q{http://github.com/hybridgroup/ticketmaster-kanbanpad}
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.0}
+  s.rubygems_version = %q{1.6.1}
   s.summary = %q{Ticketmaster Provider for Kanbanpad}
   s.test_files = [
     "spec/comments_spec.rb",
