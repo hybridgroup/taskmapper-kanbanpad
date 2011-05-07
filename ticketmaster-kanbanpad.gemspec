@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ticketmaster-kanbanpad}
-  s.version = "0.3.2"
+  s.version = "0.3.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = %q{2011-05-05}
+  s.date = %q{2011-05-06}
   s.description = %q{Allows ticketmaster to interact with kanbanpad.}
   s.email = %q{sonia@hybridgroup.com}
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "spec/fixtures/tasks/4cd428c496f0734eef000007.xml",
     "spec/fixtures/tasks/4cd428c496f0734eef000008.json",
     "spec/fixtures/tasks/4cd428c496f0734eef000008.xml",
+    "spec/fixtures/tasks/4dc31c4c9bd0ff6c3700004e.json",
     "spec/fixtures/tasks/create.xml",
     "spec/projects_spec.rb",
     "spec/spec.opts",
