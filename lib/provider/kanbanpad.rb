@@ -21,5 +21,14 @@ module TicketMaster::Provider
       ::KanbanpadAPI.authenticate((auth.username.blank? ? auth.email : auth.username), (auth.password.blank? ? auth.token : auth.password))
     end
 
+    def valid?
+      begin
+        PROJECT_API.find(:first).nil?
+        true
+      rescue
+        false
+      end
+    end
+
   end
 end
