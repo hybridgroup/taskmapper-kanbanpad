@@ -24,6 +24,7 @@ module TicketMaster::Provider
 
       def self.create(*options)
         comment = API.new options[0].first
+        comment.save
         self.new comment
       end
 
