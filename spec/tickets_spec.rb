@@ -65,4 +65,11 @@ describe "Ticketmaster::Provider::Kanbanpad::Ticket" do
     @ticket.assignee.should == 'Nobody'
   end
 
+  it "should be able to create a comment" do 
+    @ticket = @project.ticket(@ticket_id)
+    comment = @ticket.comment!(:body => 'testing')
+    comment.should be_an_instance_of(@comment_klass)
+    comment.body.should == 'testing'
+  end
+
 end

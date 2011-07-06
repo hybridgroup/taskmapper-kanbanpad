@@ -22,6 +22,11 @@ module TicketMaster::Provider
         comments = API.find(:all, :params => {:project_id => project_id, :task_id => ticket_id}).collect { |comment| self.new comment }
       end
 
+      def self.create(*options)
+        comment = API.new options[0].first
+        self.new comment
+      end
+
       def updated_at
         @updated_at ||= begin
           Time.parse(self[:updated_at])

@@ -76,9 +76,11 @@ module TicketMaster::Provider
       end
 
       #TODO? Exists...need to hook this up and test
-      def comment!
-        warn 'Perhaps you should leave feedback to request it?'
-        []
+      def comment!(*options)
+        options.first.merge!(:project_slug => self.project_id, 
+                             :step_id => self.step_id,
+                             :ticket_id => self.id)
+        Comment.create(options)
       end
 
       private
