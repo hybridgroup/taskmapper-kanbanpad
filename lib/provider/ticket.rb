@@ -77,10 +77,10 @@ module TicketMaster::Provider
 
       #TODO? Exists...need to hook this up and test
       def comment!(*options)
-        options.first.merge!(:project_slug => self.project_id, 
+        options.first.merge!(:project_id => self.project_id, 
                              :step_id => self.step_id,
-                             :ticket_id => self.id)
-        Comment.create(options)
+                             :task_id => self.id)
+        Comment.create(options.first)
       end
 
       private

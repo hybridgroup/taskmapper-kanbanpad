@@ -23,7 +23,8 @@ module TicketMaster::Provider
       end
 
       def self.create(*options)
-        comment = API.new options[0].first
+        comment = KanbanpadAPI::TaskCommentCreator.new options.first
+        puts comment.inspect
         comment.save
         self.new comment
       end
