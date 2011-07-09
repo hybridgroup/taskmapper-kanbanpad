@@ -41,4 +41,11 @@ describe "Ticketmaster::Provider::Kanbanpad::Comment" do
     @comments.first.should be_an_instance_of(@klass)
   end
 
+  it "should be able to create a new comment" do 
+    @comment = @klass.create(:project_id => 'be74b643b64e3dc79aa0',
+                             :task_id => '4cd428c496f0734eef000007',
+                             :step_id => '4dc312f49bd0ff6c37000040', :comment => {:body => 'testing'})
+    @comment.should be_an_instance_of(@klass)
+  end
+
 end

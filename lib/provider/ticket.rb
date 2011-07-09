@@ -79,7 +79,8 @@ module TicketMaster::Provider
       def comment!(*options)
         options.first.merge!(:project_id => self.project_id, 
                              :step_id => self.step_id,
-                             :task_id => self.id)
+                             :task_id => self.id,
+                             :comment => {:body => options.first.delete(:body)}) 
         Comment.create(options.first)
       end
 
