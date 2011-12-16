@@ -18,7 +18,7 @@ module TicketMaster::Provider
       if (auth.username.blank? and auth.email.blank?) and (auth.token.blank? and auth.password.blank?)
         raise "Please provide at least a set of username and password)"
       end
-      ::KanbanpadAPI.authenticate((auth.username.blank? ? auth.email : auth.username), (auth.password.blank? ? auth.token : auth.password))
+      KanbanpadAPI.authenticate((auth.username.blank? ? auth.email : auth.username), (auth.password.blank? ? auth.token : auth.password))
     end
 
     def valid?

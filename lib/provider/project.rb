@@ -7,6 +7,22 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
       API = KanbanpadAPI::Project
 
+      def initialize(*object)
+        if object.first
+          object = object.first
+          @system_data = {:client => object}
+          unless object.is_a? Hash
+            hash = {:id => object.slug,
+                    :name => object.name, 
+                    :created_at => object.created_at,
+                    :updated_at => object.updated_at}
+          else
+            hash = object
+          end
+          super hash
+        end
+      end
+
       # copy from this.copy(that) copies that into this
       def copy(project)
         project.tickets.each do |ticket|
@@ -36,6 +52,11 @@ module TicketMaster::Provider
         rescue
           self[:updated_at]
         end
+      end
+
+      def self.find_by_attributes(attributes = {})
+        projects = API.find(:all).collect { |project| self.new project }
+        search_by_attribute(projects, attributes)
       end
 
     end
