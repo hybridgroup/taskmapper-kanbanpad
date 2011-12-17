@@ -16,7 +16,8 @@ module TicketMaster::Provider
                     :backlog => object.backlog,
                     :wip => object.wip,
                     :created_at => object.created_at,
-                    :updated_at => object.updated_at}
+                    :updated_at => object.updated_at,
+                    :project_slug => object.project_slug}
           else
             hash = object
           end
