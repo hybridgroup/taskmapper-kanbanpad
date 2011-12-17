@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe "Ticketmaster::Provider::Kanbanpad::Comment" do
+describe TicketMaster::Provider::Kanbanpad::Comment do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
