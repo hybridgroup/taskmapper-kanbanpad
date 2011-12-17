@@ -41,4 +41,6 @@ describe "Ticketmaster::Provider::Kanbanpad::Comment" do
     @comments.first.should be_an_instance_of(@klass)
   end
 
+  it "should be able to create a comment for a given task"
+
 end
