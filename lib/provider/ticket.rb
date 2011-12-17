@@ -6,6 +6,24 @@ module TicketMaster::Provider
       API = KanbanpadAPI::Task
       STEP_API = KanbanpadAPI::Step
 
+      def initialize(*object)
+        if object.first
+          object = object.first
+          unless object.is_? Hash
+            hash = {:id => object.id,
+                    :description => object.note,
+                    :finished => object.finished,
+                    :backlog => object.backlog,
+                    :wip => object.wip,
+                    :created_at => object.created_at,
+                    :updated_at => object.updated_at}
+          else
+            hash = object
+          end
+          super hash
+        end
+      end
+
       def status
         return "Finished" if self.finished
         return "Backlog" if self.backlog
@@ -17,7 +35,7 @@ module TicketMaster::Provider
       end
 
       def assignee
-        self.assigned_to.empty? ? 'Nobody' : self.assigned_to.first
+        self.assigned_to.blank? ? 'Nobody' : self.assigned_to.first
       end
 
       def project_id
