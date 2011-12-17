@@ -14,6 +14,7 @@ module TicketMaster::Provider
           unless object.is_a? Hash
             hash = {:id => object.slug,
                     :name => object.name, 
+                    :slug => object.slug,
                     :created_at => object.created_at,
                     :updated_at => object.updated_at}
           else
@@ -52,11 +53,6 @@ module TicketMaster::Provider
         rescue
           self[:updated_at]
         end
-      end
-
-      def self.find_by_attributes(attributes = {})
-        projects = API.find(:all).collect { |project| self.new project }
-        search_by_attribute(projects, attributes)
       end
 
     end
