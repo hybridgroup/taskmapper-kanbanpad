@@ -10,6 +10,22 @@ module TicketMaster::Provider
       # declare needed overloaded methods here
       API = KanbanpadAPI::TaskComment
       
+      def initialize(*object)
+        if object.first
+          object = object.first
+          unless object.is_a? Hash
+            hash = {:id => object.id,
+                    :author => object.author,
+                    :body => object.body,
+                    :created_at => object.created_at,
+                    :updated_at => object.updated_at}
+          else
+            hash = object
+          end
+          super hash
+        end
+      end
+
       def self.find_by_id(project_id, ticket_id, id)
         self.search(project_id, ticket_id).select { |ticket| ticket.id == id }.first
       end
