@@ -17,7 +17,8 @@ module TicketMaster::Provider
                     :wip => object.wip,
                     :created_at => object.created_at,
                     :updated_at => object.updated_at,
-                    :project_slug => object.project_slug}
+                    :project_slug => object.project_slug,
+                    :step_id => object.step_id}
           else
             hash = object
           end
@@ -94,10 +95,8 @@ module TicketMaster::Provider
         nil
       end
 
-      #TODO? Exists...need to hook this up and test
-      def comment!
-        warn 'Perhaps you should leave feedback to request it?'
-        []
+      def comment!(*options)
+        Comment.create(self.project_id, self.id, self.step_id, options)
       end
 
       private
