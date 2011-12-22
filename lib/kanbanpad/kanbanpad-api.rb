@@ -107,4 +107,9 @@ module KanbanpadAPI
       "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
     end
   end
+
+  class TaskCommentCreator < Base
+    self.site += 'projects/:project_id/steps/:step_id/tasks/:task_id'
+    self.element_name = 'comment'
+  end
  end

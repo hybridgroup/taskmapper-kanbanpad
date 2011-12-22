@@ -55,11 +55,10 @@ module TicketMaster::Provider
       end
 
       def self.create(project_id, ticket_id, step_id, *options)
-        options[0].first.merge!(:project_id => project_id, :task_id => ticket_id, :step_id => step_id)
-        task_comment = API.new(options[0].first)
-        comment = self.new task_comment
+        options.first.merge!(:project_id => project_id, :task_id => ticket_id, :step_id => step_id)
+        task_comment = KanbanpadAPI::TaskCommentCreator.new(options.first)
         task_comment.save
-        comment
+        self.new task_comment
       end
 
     end
