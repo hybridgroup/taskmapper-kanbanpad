@@ -61,8 +61,8 @@ module TicketMaster::Provider
           options.first.merge!(:assigned_to => options.first.delete('assignee'),
                                :note => options.first[:description])
           task = API.new(options.first)
-          ticket = self.new task
           task.save
+          ticket = self.new task
           ticket
         end
       end
@@ -96,7 +96,7 @@ module TicketMaster::Provider
       end
 
       def comment!(*options)
-        Comment.create(self.project_id, self.id, self.step_id, options)
+        Comment.create(self.project_id, self.id, self.step_id, options.first)
       end
 
       private
