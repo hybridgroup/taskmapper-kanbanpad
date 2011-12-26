@@ -95,8 +95,8 @@ module TicketMaster::Provider
         nil
       end
 
-      def comment!(*options)
-        Comment.create(self.project_id, self.id, self.step_id, options.first)
+      def comment!
+        warn 'Kanbanpad provider does not support comment creation yet'
       end
 
       private
