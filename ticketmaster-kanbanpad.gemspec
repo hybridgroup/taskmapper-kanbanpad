@@ -4,20 +4,24 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{ticketmaster-kanbanpad}
-  s.version = "0.4.3"
+  s.name = "ticketmaster-kanbanpad"
+  s.version = "0.4.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = %q{2011-06-06}
-  s.description = %q{Allows ticketmaster to interact with kanbanpad.}
-  s.email = %q{sonia@hybridgroup.com}
+  s.date = "2011-12-26"
+  s.description = "Allows ticketmaster to interact with kanbanpad."
+  s.email = "sonia@hybridgroup.com"
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
   ]
   s.files = [
     ".document",
+    ".rbenv-gemsets",
+    ".rbenv-version",
+    "Gemfile",
+    "Gemfile.lock",
     "LICENSE",
     "README.md",
     "VERSION",
@@ -30,11 +34,14 @@ Gem::Specification.new do |s|
     "rakefile",
     "spec/comments_spec.rb",
     "spec/fixtures/comments.json",
+    "spec/fixtures/comments/4ef2719bf17365000110df9e.json",
     "spec/fixtures/projects.json",
     "spec/fixtures/projects.xml",
     "spec/fixtures/projects/be74b643b64e3dc79aa0.json",
     "spec/fixtures/projects/be74b643b64e3dc79aa0.xml",
+    "spec/fixtures/projects/create.json",
     "spec/fixtures/projects/create.xml",
+    "spec/fixtures/projects/test.rb",
     "spec/fixtures/steps/4dc312f49bd0ff6c37000040.json",
     "spec/fixtures/tasks.json",
     "spec/fixtures/tasks.xml",
@@ -51,27 +58,35 @@ Gem::Specification.new do |s|
     "spec/tickets_spec.rb",
     "ticketmaster-kanbanpad.gemspec"
   ]
-  s.homepage = %q{http://github.com/hybridgroup/ticketmaster-kanbanpad}
+  s.homepage = "http://github.com/hybridgroup/ticketmaster-kanbanpad"
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.1}
-  s.summary = %q{Ticketmaster Provider for Kanbanpad}
-  s.test_files = [
-    "spec/comments_spec.rb",
-    "spec/projects_spec.rb",
-    "spec/spec_helper.rb",
-    "spec/ticketmaster-kanbanpad_spec.rb",
-    "spec/tickets_spec.rb"
-  ]
+  s.rubygems_version = "1.8.10"
+  s.summary = "Ticketmaster Provider for Kanbanpad"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<ticketmaster>, ["~> 0.6.0"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
+      s.add_dependency(%q<ticketmaster>, ["~> 0.6.0"])
+      s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+      s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+      s.add_dependency(%q<rcov>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
+    s.add_dependency(%q<ticketmaster>, ["~> 0.6.0"])
+    s.add_dependency(%q<rspec>, ["~> 2.3.0"])
+    s.add_dependency(%q<bundler>, ["~> 1.0.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
+    s.add_dependency(%q<rcov>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 1.2.9"])
   end
 end
