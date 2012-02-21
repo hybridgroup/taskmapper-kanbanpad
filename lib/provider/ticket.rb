@@ -5,7 +5,8 @@ module TicketMaster::Provider
     class Ticket < TicketMaster::Provider::Base::Ticket
       API = KanbanpadAPI::Task
       STEP_API = KanbanpadAPI::Step
-
+      TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator
+  
       def initialize(*object)
         if object.first
           object = object.first
@@ -95,8 +96,16 @@ module TicketMaster::Provider
         nil
       end
 
-      def comment!
-        warn 'Kanbanpad provider does not support comment creation yet'
+      def comment!(*options)
+        if options.first.is_a? Hash
+          options.first.merge!(:project_id => self.project_id,
+                               :task_id => self.id,
+                               :step_id => self.step_id)
+                               
+          task_comment = TASK_COMMENT_API.new(options.first)
+          task_comment.save
+          comment = Comment.new(task_comment.attributes)
+        end
       end
 
       private
