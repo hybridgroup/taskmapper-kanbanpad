@@ -111,10 +111,11 @@ module KanbanpadAPI
   class TaskCommentCreator < Base
     self.site += 'projects/:project_id/steps/:step_id/tasks/:task_id'
     self.element_name = 'comment'
-
-    def self.element_path(id, prefix_options = {}, query_options = nil) 
+    
+    def self.element_path(id, prefix_options = {}, query_options = nil)
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
       "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
     end
+
   end
  end

@@ -6,7 +6,8 @@ module TicketMaster::Provider
     class Project < TicketMaster::Provider::Base::Project
       # declare needed overloaded methods here
       API = KanbanpadAPI::Project
-
+      PROJECT_COMMENT_API = KanbanpadAPI::ProjectComment
+      
       def initialize(*object)
         if object.first
           object = object.first
@@ -54,6 +55,17 @@ module TicketMaster::Provider
           self[:updated_at]
         end
       end
+      
+      def comment!(*options)
+        if options.first.is_a? Hash
+          options.first.merge!(:project_id => self.id)
+                               
+          project_comment = PROJECT_COMMENT_API.new(options.first)
+          project_comment.save
+          comment = Comment.new(project_comment.attributes)
+        end
+      end
+      
 
     end
   end

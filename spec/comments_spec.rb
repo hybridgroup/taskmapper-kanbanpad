@@ -4,13 +4,16 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
+    pheaders = headers.merge("Content-Type" => "application/json")
+    
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', wheaders, fixture_for('tasks'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', wheaders, fixture_for('tasks'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007/comments.json', wheaders, fixture_for('comments'), 200
-      mock.post '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007/comments.json', wheaders, fixture_for('comments/4ef2719bf17365000110df9e'), 200
+      mock.post '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007/comments.json', pheaders, fixture_for('comments/4ef2719bf17365000110df9e'), 200
+      mock.post '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', pheaders, fixture_for('comments/4ef2719bf17365000110df9e'), 200
     end
     @project_id = 'be74b643b64e3dc79aa0'
     @ticket_id = '4cd428c496f0734eef000007'
@@ -43,8 +46,12 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
   end
 
   it "should be able to create a comment for a given task" do
-    pending
     @comment = @ticket.comment!(:body => "New Ticket")
+    @comment.should be_an_instance_of(@klass)
+  end
+  
+  it "should be able to create a comment for a given project" do
+    @comment = @project.comment!(:body => "New Project Comment")
     @comment.should be_an_instance_of(@klass)
   end
 
