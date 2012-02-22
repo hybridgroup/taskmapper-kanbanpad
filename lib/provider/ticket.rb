@@ -15,6 +15,7 @@ module TicketMaster::Provider
                     :description => object.note,
                     :finished => object.finished,
                     :backlog => object.backlog,
+                    :assigned_to => object.assigned_to,
                     :wip => object.wip,
                     :created_at => object.created_at,
                     :updated_at => object.updated_at,
@@ -59,12 +60,11 @@ module TicketMaster::Provider
 
       def self.create(*options)
         if options.first.is_a? Hash
-          options.first.merge!(:assigned_to => options.first.delete('assignee'),
+          options.first.merge!(:assigned_to => options.first.delete(:assignee),
                                :note => options.first[:description])
           task = API.new(options.first)
           task.save
           ticket = self.new task
-          ticket
         end
       end
 
