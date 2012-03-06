@@ -12,13 +12,10 @@ module TicketMaster::Provider
           object = object.first
           unless object.is_? Hash
             hash = {:id => object.id,
-                    :description => object.note,
                     :finished => object.finished,
                     :backlog => object.backlog,
                     :assigned_to => object.assigned_to,
                     :wip => object.wip,
-                    :created_at => object.created_at,
-                    :updated_at => object.updated_at,
                     :project_slug => object.project_slug,
                     :step_id => object.step_id}
           else
