@@ -33,7 +33,7 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
     @project.tickets.should be_an_instance_of(Array)
     @project.tickets.first.should be_an_instance_of(@klass)
   end
-  
+
   it "should be able to load all tickets based on an array of ids" do
     @tickets = @project.tickets([@ticket_id])
     @tickets.should be_an_instance_of(Array)
@@ -41,42 +41,49 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
     @tickets.first.id.should == '4cd428c496f0734eef000007'
   end
 
-  it "should retrieve a ticket without notes" do 
+  it "should retrieve a ticket without notes" do
     @ticket = @project.ticket(@ticket_id_without_note)
     @ticket.should be_an_instance_of(@klass)
   end
-  
+
   it "should be able to load all tickets based on attributes" do
     @tickets = @project.tickets(:id => @ticket_id)
     @tickets.should be_an_instance_of(Array)
     @tickets.first.should be_an_instance_of(@klass)
     @tickets.first.id.should == '4cd428c496f0734eef000007'
   end
-  
+
   it "should return the ticket class" do
     @project.ticket.should == @klass
   end
-  
+
   it "should be able to load a single ticket" do
     @ticket = @project.ticket(@ticket_id)
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
   end
-  
+
   it "should be able to load a single ticket based on attributes" do
     @ticket = @project.ticket(:id => @ticket_id)
     @ticket.should be_an_instance_of(@klass)
     @ticket.id.should == @ticket_id
   end
 
-  it "should return nobody as assignee for an empty assignee from the api" do 
+  it "should return nobody as assignee for an empty assignee from the api" do
     @ticket = @project.ticket(@ticket_id_without_assignee)
     @ticket.assignee.should == 'Nobody'
   end
-  
-  it "should be able to create a ticket for a given project" do 
+
+  it "should be able to create a ticket for a given project" do
     @ticket = @project.ticket!(:title => 'New ticket', :assignee => ['jhon'], :description => 'Ticket description')
     @ticket.should be_an_instance_of(@klass)
+  end
+
+  it "should be able to update a ticket" do
+    @ticket = @project.ticket(@ticket_id)
+    @ticket.save.should be_false
+    @ticket.title = "Hello World"
+    @ticket.save.should be_true
   end
 
 end
