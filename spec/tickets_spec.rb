@@ -96,7 +96,7 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
     ticket.title.should == 'Fix UI detail'
     ticket.created_at.should_not be_nil
     ticket.updated_at.should_not be_nil
-    ticket.description.should == ''
+    ticket.description.should be_nil
     ticket.assignee.should == ''
     ticket.requestor.should == ''
     ticket.project_id.should == ''
