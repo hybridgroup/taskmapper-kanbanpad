@@ -5,6 +5,7 @@
    <assigned_to>chris</assigned_to>
   <note></note>
   <task_id>2</task_id>
+  <urgent>false</urgent>
   <wip type="boolean">false</wip>
   <project_slug>be74b643b64e3dc79aa0</project_slug>
   <backlog>false</backlog>

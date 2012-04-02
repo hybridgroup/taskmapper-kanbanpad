@@ -3,6 +3,7 @@
   <id>4cd428c496f0734eef000007</id>
   <task_id>1</task_id>
   <title>Fix UI detail</title>
+  <urgent>false</urgent>
   <assigned_to>jhon</assigned_to>
   <note>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</note>
   <wip type="boolean">false</wip>

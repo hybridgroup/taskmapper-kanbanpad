@@ -19,12 +19,17 @@ module TicketMaster::Provider
                     :assigned_to => object.assigned_to,
                     :wip => object.wip,
                     :project_slug => object.project_slug,
-                    :step_id => object.step_id}
+                    :step_id => object.step_id,
+                    :urgent => object.urgent}
           else
             hash = object
           end
           super hash
         end
+      end
+
+      def priority
+       self.urgent ? "Urgent" : "Not Urgent"
       end
 
       def status
