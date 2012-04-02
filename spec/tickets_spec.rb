@@ -91,10 +91,10 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
     ticket = @project.ticket(@ticket_id)
     ticket.id.should == '4cd428c496f0734eef000007'
     ticket.status.should == 'Finished'
-    ticket.priority.should == ''
-    ticket.title.should == ''
-    ticket.resolution.should == ''
-    ticket.created_at.should == ''
+    ticket.priority.should == 'Not Urgent'
+    ticket.resolution.should be_nil
+    ticket.title.should == 'Fix UI detail'
+    ticket.created_at.should_not be_nil
     ticket.updated_at.should == ''
     ticket.description.should == ''
     ticket.assignee.should == ''
