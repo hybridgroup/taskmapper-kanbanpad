@@ -6,13 +6,15 @@ module TicketMaster::Provider
       API = KanbanpadAPI::Task
       STEP_API = KanbanpadAPI::Step
       TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator
-  
+
       def initialize(*object)
         if object.first
           object = object.first
+          @system_data = {:client => object}
           unless object.is_? Hash
             hash = {:id => object.id,
                     :finished => object.finished,
+                    :title => object.title,
                     :backlog => object.backlog,
                     :assigned_to => object.assigned_to,
                     :wip => object.wip,
@@ -98,7 +100,7 @@ module TicketMaster::Provider
           options.first.merge!(:project_id => self.project_id,
                                :task_id => self.id,
                                :step_id => self.step_id)
-                               
+
           task_comment = TASK_COMMENT_API.new(options.first)
           task_comment.save
           comment = Comment.new(task_comment.attributes)

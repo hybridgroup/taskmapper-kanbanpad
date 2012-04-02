@@ -2,6 +2,7 @@
 <tasks type="array">
   <task>
     <id>4cd428c496f0734eef000007</id>
+    <task_id>1</task_id>
     <title>Configure app</title>
     <assigned_to>jhon</assigned_to>
     <note></note>
@@ -12,6 +13,7 @@
   </task>
   <task>
     <id>4cd428c496f0734eef000008</id>
+    <task_id>2</task_id>
     <title>Fix issue</title>
     <assigned_to>james</assigned_to>
     <note></note>
