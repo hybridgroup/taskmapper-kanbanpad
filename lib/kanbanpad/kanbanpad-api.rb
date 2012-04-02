@@ -28,7 +28,7 @@ module KanbanpadAPI
       @resources ||= []
     end
   end
-  
+
   class Base < ActiveResource::Base
     self.site = "https://www.kanbanpad.com/api/v1/"
     self.format = :json
@@ -37,7 +37,7 @@ module KanbanpadAPI
       super
     end
   end
-  
+
   # Find projects
   #
   #   KanbanpadAPI::Project.find(:all) # find all projects for the current account.
@@ -53,13 +53,13 @@ module KanbanpadAPI
   #   
   #   KanbanpadAPI::Task.finished('7e2cad4b3cbe5954950c')
   #
-  
+
   class Project < Base
 
     def tasks(slug, options = {}) 
       Task.find(:all, :params => options.update(:project_id => slug, :backlog => 'yes', :finished => 'yes'))
     end
-	
+
     def steps(options = {})
       Step.find(:all, :params => options.update(:project_id => slug))
     end
@@ -69,7 +69,8 @@ module KanbanpadAPI
     end
   end
 
-  class Task < Base
+  class TaskList < Base
+    self.element_name = 'task'
     self.site += 'projects/:project_id/'
 
     def self.finished(project_id, options = {})
@@ -85,6 +86,10 @@ module KanbanpadAPI
     end
   end
 
+  class Task < Base
+    self.site += 'projects/:project_id/steps/:step_id/'
+  end
+
   class Step < Base
     self.site += 'projects/:project_id/'
 
@@ -92,7 +97,7 @@ module KanbanpadAPI
       Task.find(:all, :params => options.merge(prefix_options))
     end
   end
- 
+
   class ProjectComment < Base
     self.site += 'projects/:project_id/'
     self.element_name = 'comment'
@@ -111,11 +116,11 @@ module KanbanpadAPI
   class TaskCommentCreator < Base
     self.site += 'projects/:project_id/steps/:step_id/tasks/:task_id'
     self.element_name = 'comment'
-    
+
     def self.element_path(id, prefix_options = {}, query_options = nil)
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
       "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
     end
 
   end
- end
+end

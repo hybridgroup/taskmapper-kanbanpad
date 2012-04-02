@@ -3,7 +3,7 @@ module TicketMaster::Provider
     # Ticket class for ticketmaster-kanbanpad
     #
     class Ticket < TicketMaster::Provider::Base::Ticket
-      API = KanbanpadAPI::Task
+      API = KanbanpadAPI::TaskList
       STEP_API = KanbanpadAPI::Step
       TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator
 
@@ -29,7 +29,7 @@ module TicketMaster::Provider
       end
 
       def priority
-       self.urgent ? "Urgent" : "Not Urgent"
+        self.urgent ? "Urgent" : "Not Urgent"
       end
 
       def status
@@ -70,6 +70,12 @@ module TicketMaster::Provider
           task.save
           ticket = self.new task
         end
+      end
+
+      def save
+        task = KanbanpadAPI::TaskList.find(:all, :params => {:project_id => self.project_id})
+        .select { |task| task.id == self.id }.first
+        task.update_attributes(:title => self.title, :project_id => self.project_id)
       end
 
       def self.find_by_attributes(project_id, attributes = {})
