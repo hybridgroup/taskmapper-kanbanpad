@@ -113,7 +113,7 @@ module TicketMaster::Provider
 
           task_comment = TASK_COMMENT_API.new(options.first)
           task_comment.save
-          comment = Comment.new(task_comment.attributes)
+          comment = Comment.new(task_comment.attributes.merge :ticket_id => id)
         end
       end
 

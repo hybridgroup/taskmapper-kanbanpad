@@ -46,8 +46,11 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
   end
 
   it "should be able to create a comment for a given task" do
-    @comment = @ticket.comment!(:body => "New Ticket")
-    @comment.should be_an_instance_of(@klass)
+    comment = @ticket.comment!(:body => "New Ticket")
+    comment.should be_an_instance_of(@klass)
+    
+    comment.ticket_id.should_not be_nil
+    comment.ticket_id.should_not == 0
   end
   
   it "should be able to create a comment for a given project" do
