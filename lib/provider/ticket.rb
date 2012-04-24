@@ -73,8 +73,8 @@ module TicketMaster::Provider
       end
 
       def save
-        task = KanbanpadAPI::TaskList.find(:all, :params => {:project_id => self.project_id}).select { |task| task.id == self.id }.first
-        task.update_attributes(:title => self.title, :project_id => self.project_id)
+        task = KanbanpadAPI::Task.find(self.id, :params => {:project_id => self.project_id, :step_id => self.step_id})
+        task.update_attributes(:title => self.title, :project_id => self.project_id, :step_id => self.step_id)
       end
 
       def self.find_by_attributes(project_id, attributes = {})
