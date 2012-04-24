@@ -51,12 +51,11 @@ module TaskMapper::Provider
       end
 
       def save
-        task = to_issue
-        task.new? ? task.save : update
+        new? ? to_issue.save : update
       end
 
       def new?
-        id.nil? 
+        id.nil? && id.zero?
       end
 
       def self.create(attributes)
@@ -120,7 +119,7 @@ module TaskMapper::Provider
       end
 
       def to_issue
-        API.new.update_with(self)
+        KanbanpadAPI::Task.new.update_with(self)
       end
     end
 
