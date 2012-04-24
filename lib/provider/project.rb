@@ -40,6 +40,10 @@ module TicketMaster::Provider
         self[:slug]
       end
 
+      def ticket!(attributes)
+        Ticket.create(attributes.merge!(:project_id => id))
+      end
+
       def created_at
         begin
           Time.parse(self[:created_at])

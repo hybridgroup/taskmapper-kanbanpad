@@ -97,7 +97,7 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
     ticket.created_at.should_not be_nil
     ticket.updated_at.should_not be_nil
     ticket.description.should be_nil
-    ticket.assignee.should == 'Rafael George'
+    ticket.assignee.should == 'Nobody'
     ticket.requestor.should be_nil
     ticket.project_id.should == 'be74b643b64e3dc79aa0'
   end
