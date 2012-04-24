@@ -20,7 +20,8 @@ class KanbanpadAPI::Task
   #FIXME: This is an ugly hack, duplication...
   def update_with(ticket)
     self.assigne_to = ticket.assignee
-    self.project_id = ticket.project_id
+    self.title = ticket.title
+    self.project_id = ticket.project_slug
     self.step_id = ticket.step_id
     self.note = ticket.description
     self
@@ -32,7 +33,9 @@ class KanbanpadAPI::TaskList
 
   def update_with(ticket)
     self.assigne_to = ticket.assignee
-    self.project_id = ticket.project_id
+    self.title = ticket.title
+    self.project_id = ticket.project_slug
+    self.step_id = ticket.step_id
     self.note = ticket.description
     self
   end

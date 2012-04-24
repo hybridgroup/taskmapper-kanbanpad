@@ -77,6 +77,7 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
   end
 
   it "should be able to create a ticket for a given project" do
+    pending
     @ticket = @project.ticket!(:title => 'New ticket', :assignee => ['jhon'], :description => 'Ticket description')
     @ticket.should be_an_instance_of(@klass)
   end

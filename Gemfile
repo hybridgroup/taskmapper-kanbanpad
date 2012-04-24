@@ -4,6 +4,7 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 
 gem "ticketmaster", "~> 0.7"
+gem "rake", "~> 0.9"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
 group :development do
