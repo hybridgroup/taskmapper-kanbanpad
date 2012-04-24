@@ -62,7 +62,7 @@ module TicketMaster::Provider
                                
           project_comment = COMMENT_API.new(options.first)
           project_comment.save
-          comment = Comment.new(project_comment.attributes)
+          comment = Comment.new(project_comment.attributes.merge :project_id => id)
         end
       end
       
