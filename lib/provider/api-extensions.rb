@@ -12,31 +12,22 @@ module APIExtentions
     :assignee => assigned_to}
   end
 
+  def update_with(ticket)
+    self.assigne_to = ticket.assignee
+    self.title = ticket.title
+    self.project_id = ticket.project_slug
+    self.step_id = ticket.step_id
+    self.prefix_options = {:step_id => ticket.step_id, :project_id => ticket.project_id}
+    self.note = ticket.description
+    self
+  end
+
 end
 
 class KanbanpadAPI::Task
   include APIExtentions
-
-  #FIXME: This is an ugly hack, duplication...
-  def update_with(ticket)
-    self.assigne_to = ticket.assignee
-    self.title = ticket.title
-    self.project_id = ticket.project_slug
-    self.step_id = ticket.step_id
-    self.note = ticket.description
-    self
-  end
 end
 
 class KanbanpadAPI::TaskList
   include APIExtentions
-
-  def update_with(ticket)
-    self.assigne_to = ticket.assignee
-    self.title = ticket.title
-    self.project_id = ticket.project_slug
-    self.step_id = ticket.step_id
-    self.note = ticket.description
-    self
-  end
 end
