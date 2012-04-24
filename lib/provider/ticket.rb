@@ -7,24 +7,12 @@ module TaskMapper::Provider
       STEP_API = KanbanpadAPI::Step
       TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator
 
-      def initialize(*object)
-        if object.first
-          object = object.first
-          @system_data = {:client => object}
-          unless object.is_? Hash
-            hash = {:id => object.id,
-                    :finished => object.finished,
-                    :title => object.title,
-                    :backlog => object.backlog,
-                    :assigned_to => object.assigned_to,
-                    :wip => object.wip,
-                    :project_slug => object.project_slug,
-                    :step_id => object.step_id,
-                    :urgent => object.urgent}
-          else
-            hash = object
-          end
-          super hash
+      def initialize(*args)
+        case args.first
+        when Hash then super args.first
+        when KanbanpadAPI::Task then super args.first.to_ticket_hash
+        when KanbanpadAPI::TaskList then super args.first.to_ticket_hash
+        else raise ArgumentError.new
         end
       end
 
@@ -62,28 +50,27 @@ module TaskMapper::Provider
         end
       end
 
-      def self.create(*options)
-        if options.first.is_a? Hash
-          options.first.merge!(:assigned_to => options.first.delete(:assignee),
-                               :note => options.first[:description])
-          task = API.new(options.first)
-          task.save
-          ticket = self.new task
-        end
+      def save
+        task = to_issue
+        task.new? ? task.save : update
       end
 
-      def save
-        task = KanbanpadAPI::Task.find(self.id, :params => {:project_id => self.project_id, :step_id => self.step_id})
-        task.update_attributes(:title => self.title, :project_id => self.project_id, :step_id => self.step_id)
+      def new?
+        id.nil? 
+      end
+
+      def self.create(attributes)
+        ticket = self.new(attributes)
+        ticket if ticket.save
       end
 
       def self.find_by_attributes(project_id, attributes = {})
-        self.search_by_attribute(self.search(project_id), attributes)
+        search_by_attribute(search(project_id), attributes)
       end
 
       def self.search(project_id, options = {}, limit = 1000)
-        tickets = API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |ticket|
-          self.new ticket
+        API.find(:all, :params => {:project_id => project_id, :backlog => 'yes', :finished => 'yes'}).collect do |task|
+          self.new task
         end
       end
 
@@ -122,7 +109,28 @@ module TaskMapper::Provider
         STEP_API.find(self.step_id, :params => {:project_id => self.project_id}).name
       end
 
+      def find_task
+        task = KanbanpadAPI::Task.find(id, :params => {:project_id => project_id, :step_id => step_id})
+        raise TicketMaster::Exception.new "Task with #{id} was not found" unless task
+        task
+      end
 
+      def update
+        find_task.update_with(self).save
+      end
+
+      def to_issue
+        API.new.update_with(self)
+      end
+    end
+
+    class Net::HTTP
+      def send(*args)
+        p "<<< Net::HTTP#send #{args.inspect}"
+        resp = super
+        p "<<< Response #{resp.inspect}"
+        resp
+      end
     end
   end
 end
