@@ -56,14 +56,9 @@ module TicketMaster::Provider
         end
       end
       
-      def comment!(*options)
-        if options.first.is_a? Hash
-          options.first.merge!(:project_id => self.id)
-                               
-          project_comment = COMMENT_API.new(options.first)
-          project_comment.save
-          comment = Comment.new(project_comment.attributes.merge :project_id => id)
-        end
+      def comment!(attributes)
+          comment = create_comment attributes
+          Comment.new(comment.attributes.merge :project_id => id) if comment.save
       end
       
       def comments
@@ -73,6 +68,10 @@ module TicketMaster::Provider
       private
         def find_comments
           COMMENT_API.find(:all, :params => { :project_id => id })
+        end
+        
+        def create_comment(attributes)
+          COMMENT_API.new(attributes.merge(:project_id => id))
         end
     end
   end
