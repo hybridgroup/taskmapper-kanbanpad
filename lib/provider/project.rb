@@ -57,8 +57,8 @@ module TicketMaster::Provider
       end
       
       def comment!(attributes)
-          comment = create_comment attributes
-          Comment.new(comment.attributes.merge :project_id => id) if comment.save
+        comment = create_comment attributes
+        Comment.new(comment.attributes.merge :project_id => id) if comment.save
       end
       
       def comments
