@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
+warn "TODO Refactor this spec to separate ticket comment from project comment"
 describe TicketMaster::Provider::Kanbanpad::Comment do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
@@ -51,6 +52,12 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
     
     comment.ticket_id.should_not be_nil
     comment.ticket_id.should_not == 0
+  end
+  
+  it "should be able to load all comments for a given project" do
+    comments = @project.comments
+    comments.should be_instance_of Array
+    comments.first.should be_instance_of TicketMaster::Provider::Project
   end
   
   it "should be able to create a comment for a given project" do
