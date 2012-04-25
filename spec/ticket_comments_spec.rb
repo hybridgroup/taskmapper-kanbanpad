@@ -52,4 +52,6 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
     comment.ticket_id.should_not == 0
   end
   
+  it "should be able to update a ticket comment"
+  
 end
