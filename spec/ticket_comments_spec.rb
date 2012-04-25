@@ -52,6 +52,12 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
     comment.ticket_id.should_not == 0
   end
   
-  it "should be able to update a ticket comment"
+  it "should be able to update a ticket comment" do
+    comment = @ticket.comments.first
+    comment.body = "New comment body"
+    
+     comment.save.should be_true
+    comment.body.should == "New comment body"
+  end
   
 end
