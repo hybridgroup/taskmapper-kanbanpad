@@ -15,6 +15,7 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040.json', wheaders, fixture_for('steps/4dc312f49bd0ff6c37000040'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4dc31c4c9bd0ff6c3700004e.json', wheaders, fixture_for('tasks/4dc31c4c9bd0ff6c3700004e'), 200
       mock.put '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+      mock.put '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
       mock.post '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
     end

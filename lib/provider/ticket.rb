@@ -109,7 +109,7 @@ module TicketMaster::Provider
       end
 
       def find_task
-        task = KanbanpadAPI::Task.find(id, :params => {:project_id => project_id, :step_id => step_id})
+        task = API.find(id, :params => {:project_id => project_id})
         raise TicketMaster::Exception.new "Task with #{id} was not found" unless task
         task
       end
@@ -120,6 +120,15 @@ module TicketMaster::Provider
 
       def to_issue
         KanbanpadAPI::TaskList.new(self)
+      end
+    end
+
+    class Net::HTTP
+      def send(*args)
+        p "<<< send #{args.inspect}"
+        resp = super
+        p "<<< response #{resp.inspect}"
+        resp
       end
     end
 
