@@ -15,6 +15,7 @@ module APIExtentions
   def update_with(ticket)
     self.assigned_to = ticket.assignee == 'Nobody' ? '' : ticket.assignee
     self.title = ticket.title
+    self.task_id = ticket.id
     self.note = ticket.description
     self
   end
