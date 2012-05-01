@@ -109,7 +109,7 @@ module TaskMapper::Provider
       end
 
       def find_task
-        task = API.find(id, :params => {:project_id => project_id})
+        task = KanbanpadAPI::Task.find(id, :params => {:project_id => project_id, :step_id => step_id})
         raise TicketMaster::Exception.new "Task with #{id} was not found" unless task
         task
       end
