@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TicketMaster::Provider::Kanbanpad::Ticket do
+describe TaskMapper::Provider::Kanbanpad::Ticket do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
@@ -25,10 +25,10 @@ describe TicketMaster::Provider::Kanbanpad::Ticket do
   end
 
   before(:each) do
-    @ticketmaster = TicketMaster.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
-    @project = @ticketmaster.project(@project_id)
-    @klass = TicketMaster::Provider::Kanbanpad::Ticket
-    @comment_klass = TicketMaster::Provider::Kanbanpad::Comment
+    @taskmapper = TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
+    @project = @taskmapper.project(@project_id)
+    @klass = TaskMapper::Provider::Kanbanpad::Ticket
+    @comment_klass = TaskMapper::Provider::Kanbanpad::Comment
   end
 
   it "should be able to load all tickets" do

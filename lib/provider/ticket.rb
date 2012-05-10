@@ -1,8 +1,8 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Kanbanpad
-    # Ticket class for ticketmaster-kanbanpad
+    # Ticket class for taskmapper-kanbanpad
     #
-    class Ticket < TicketMaster::Provider::Base::Ticket
+    class Ticket < TaskMapper::Provider::Base::Ticket
       API = KanbanpadAPI::TaskList
       STEP_API = KanbanpadAPI::Step
       TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator

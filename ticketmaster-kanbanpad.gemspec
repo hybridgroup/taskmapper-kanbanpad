@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = "ticketmaster-kanbanpad"
+  s.name = "taskmapper-kanbanpad"
   s.version = "0.6.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
   s.date = "2012-05-01"
-  s.description = "Allows ticketmaster to interact with kanbanpad."
+  s.description = "Allows taskmapper to interact with kanbanpad."
   s.email = "sonia@hybridgroup.com"
   s.extra_rdoc_files = [
     "LICENSE",
@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
     "lib/provider/kanbanpad.rb",
     "lib/provider/project.rb",
     "lib/provider/ticket.rb",
-    "lib/ticketmaster-kanbanpad.rb",
+    "lib/taskmapper-kanbanpad.rb",
     "spec/fixtures/comments.json",
     "spec/fixtures/comments/4ef2719bf17365000110df9e.json",
     "spec/fixtures/projects.json",
@@ -56,20 +56,20 @@ Gem::Specification.new do |s|
     "spec/spec.opts",
     "spec/spec_helper.rb",
     "spec/ticket_comments_spec.rb",
-    "spec/ticketmaster-kanbanpad_spec.rb",
+    "spec/taskmapper-kanbanpad_spec.rb",
     "spec/tickets_spec.rb",
-    "ticketmaster-kanbanpad.gemspec"
+    "taskmapper-kanbanpad.gemspec"
   ]
-  s.homepage = "http://github.com/hybridgroup/ticketmaster-kanbanpad"
+  s.homepage = "http://github.com/hybridgroup/taskmapper-kanbanpad"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.17"
-  s.summary = "Ticketmaster Provider for Kanbanpad"
+  s.summary = "taskmapper Provider for Kanbanpad"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_runtime_dependency(%q<taskmapper>, ["= 0.6.10"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8"])
       s.add_development_dependency(%q<bundler>, ["~> 1.1"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
@@ -77,7 +77,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
-      s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+      s.add_dependency(%q<taskmapper>, ["= 0.6.10"])
       s.add_dependency(%q<rspec>, ["~> 2.8"])
       s.add_dependency(%q<bundler>, ["~> 1.1"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
@@ -86,7 +86,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
-    s.add_dependency(%q<ticketmaster>, ["= 0.6.10"])
+    s.add_dependency(%q<taskmapper>, ["= 0.6.10"])
     s.add_dependency(%q<rspec>, ["~> 2.8"])
     s.add_dependency(%q<bundler>, ["~> 1.1"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])

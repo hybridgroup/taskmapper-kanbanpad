@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TicketMaster::Provider::Kanbanpad::Project do
+describe TaskMapper::Provider::Kanbanpad::Project do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
@@ -13,37 +13,37 @@ describe TicketMaster::Provider::Kanbanpad::Project do
   end
       
   before(:each) do
-	  @ticketmaster = TicketMaster.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
-    @klass = TicketMaster::Provider::Kanbanpad::Project
+	  @taskmapper = TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
+    @klass = TaskMapper::Provider::Kanbanpad::Project
   end
   
   it "should be able to load all projects" do
-    @ticketmaster.projects.should be_an_instance_of(Array)
-    @ticketmaster.projects.first.should be_an_instance_of(@klass)
+    @taskmapper.projects.should be_an_instance_of(Array)
+    @taskmapper.projects.first.should be_an_instance_of(@klass)
   end
   
   it "should be able to load projects from an array of ids" do
-    @projects = @ticketmaster.projects([@project_id])
+    @projects = @taskmapper.projects([@project_id])
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
     @projects.first.slug.should == @project_id
   end
   
   it "should be able to load all projects from attributes" do
-    @projects = @ticketmaster.projects(:slug => @project_id)
+    @projects = @taskmapper.projects(:slug => @project_id)
     @projects.should be_an_instance_of(Array)
     @projects.first.should be_an_instance_of(@klass)
     @projects.first.slug.should == @project_id
   end
   
   it "should be able to find a project" do
-    @ticketmaster.project.should == @klass
-    @ticketmaster.project.find(@project_id).should be_an_instance_of(@klass)
+    @taskmapper.project.should == @klass
+    @taskmapper.project.find(@project_id).should be_an_instance_of(@klass)
   end
   
   it "should be able to find a project by slug" do
-    @ticketmaster.project(@project_id).should be_an_instance_of(@klass)
-    @ticketmaster.project(@project_id).slug.should == @project_id
+    @taskmapper.project(@project_id).should be_an_instance_of(@klass)
+    @taskmapper.project(@project_id).slug.should == @project_id
   end
 
 end

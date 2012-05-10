@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe TicketMaster::Provider::Kanbanpad::Comment do
+describe TaskMapper::Provider::Kanbanpad::Comment do
   before(:all) do
     headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
     wheaders = headers.merge('Accept' => 'application/json')
@@ -17,15 +17,15 @@ describe TicketMaster::Provider::Kanbanpad::Comment do
   end
 
   before(:each) do
-    @ticketmaster = TicketMaster.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
-    @project = @ticketmaster.project(@project_id)
-    @klass = TicketMaster::Provider::Kanbanpad::Comment
+    @taskmapper = TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
+    @project = @taskmapper.project(@project_id)
+    @klass = TaskMapper::Provider::Kanbanpad::Comment
   end
 
   it "should be able to load all comments" do
     comments = @project.comments
     comments.should be_instance_of Array
-    comments.first.should be_instance_of TicketMaster::Provider::Kanbanpad::Comment
+    comments.first.should be_instance_of TaskMapper::Provider::Kanbanpad::Comment
   end
   
   it "should be able to create a comment" do

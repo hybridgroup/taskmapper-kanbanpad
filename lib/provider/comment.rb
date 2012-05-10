@@ -1,12 +1,12 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Kanbanpad
-    # The comment class for ticketmaster-kanbanpad
+    # The comment class for taskmapper-kanbanpad
     #
-    # Do any mapping between Ticketmaster and your system's comment model here
+    # Do any mapping between taskmapper and your system's comment model here
     # versions of the ticket.
     #
     # Not supported by Kanbanpad API
-    class Comment < TicketMaster::Provider::Base::Comment
+    class Comment < TaskMapper::Provider::Base::Comment
       # declare needed overloaded methods here
       API = KanbanpadAPI::TaskComment
       

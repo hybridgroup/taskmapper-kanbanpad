@@ -1,19 +1,19 @@
-module TicketMaster::Provider
-  # This is the Kanbanpad Provider for ticketmaster
+module TaskMapper::Provider
+  # This is the Kanbanpad Provider for taskmapper
   
   module Kanbanpad
-    include TicketMaster::Provider::Base
+    include TaskMapper::Provider::Base
     TICKET_API = KanbanpadAPI::Task
     PROJECT_API = KanbanpadAPI::Project
     
-    # This is for cases when you want to instantiate using TicketMaster::Provider::Kanbanpad.new(auth)
+    # This is for cases when you want to instantiate using TaskMapper::Provider::Kanbanpad.new(auth)
     def self.new(auth = {})
-      TicketMaster.new(:kanbanpad, auth)
+      TaskMapper.new(:kanbanpad, auth)
     end
 
     # The authorize and initializer for this provider
     def authorize(auth = {})
-      @authentication ||= TicketMaster::Authenticator.new(auth)
+      @authentication ||= TaskMapper::Authenticator.new(auth)
       auth = @authentication
       if (auth.username.blank? and auth.email.blank?) and (auth.token.blank? and auth.password.blank?)
         raise "Please provide at least a set of username and password)"

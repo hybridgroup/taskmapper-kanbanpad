@@ -1,9 +1,9 @@
-module TicketMaster::Provider
+module TaskMapper::Provider
   module Kanbanpad
-    # Project class for ticketmaster-kanbanpad
+    # Project class for taskmapper-kanbanpad
     # 
     # 
-    class Project < TicketMaster::Provider::Base::Project
+    class Project < TaskMapper::Provider::Base::Project
       # declare needed overloaded methods here
       API = KanbanpadAPI::Project
       COMMENT_API = KanbanpadAPI::ProjectComment
