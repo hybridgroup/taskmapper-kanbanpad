@@ -1,25 +1,25 @@
-# ticketmaster-kanbanpad
+# taskmapper-kanbanpad
 
-This is the provider for interaction with [kanbanpad](https://www.kanbanpad.com) using [ticketmaster](http://ticketrb.com)
+This is the provider for interaction with [kanbanpad](https://www.kanbanpad.com) using [taskmapper](http://ticketrb.com)
 
 # Usage
 
-Initialize the kanbanpad ticketmaster instance using a username and api key:
+Initialize the kanbanpad taskmapper instance using a username and api key:
   
-    kanbanpad = TicketMaster.new(:kanbanpad, :username => 'you', :password => 'api_key')
+    kanbanpad = taskmapper.new(:kanbanpad, :username => 'you', :password => 'api_key')
 
 
 ## Requirements
 
 * rubygems (obviously)
-* ticketmaster gem (latest version preferred)
+* taskmapper gem (latest version preferred)
 * jeweler gem (only if you want to repackage and develop)
 
-The ticketmaster gem should automatically be installed during the installation of this gem if it is not already installed.
+The taskmapper gem should automatically be installed during the installation of this gem if it is not already installed.
 
 ## Other Notes
 
-Since this and the ticketmaster gem is still primarily a work-in-progress, minor changes may be incompatible with previous versions. Please be careful about using and updating this gem in production.
+Since this and the taskmapper gem is still primarily a work-in-progress, minor changes may be incompatible with previous versions. Please be careful about using and updating this gem in production.
 
 If you see or find any issues, feel free to open up an issue report.
 
