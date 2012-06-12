@@ -13,6 +13,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   let(:ticket_class) { TaskMapper::Provider::Kanbanpad::Ticket }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
+
   describe "Retrieving tickets" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
@@ -23,6 +24,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
       end
     end
     let(:project) { tm.project project_id }
+
 
     context "when calling #tickets on a project instance" do 
       subject { project.tickets } 
@@ -56,7 +58,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
         it { should be_an_instance_of ticket_class } 
         it { subject.id.should be_eql ticket_id }
       end
-      
+
       context "when retrieving a ticket without assignee" do 
         subject { project.ticket ticket_id_without_assignee }
         it { subject.assignee.should be_eql 'Nobody' }
@@ -67,31 +69,32 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
         it { subject.id.should be_eql '4cd428c496f0734eef000007' }
         it { subject.status.should be_eql 'Finished' }
         it { subject.priority.should be_eql 'Not Urgent' }
-        it { subject.resolution.should_not be_nil }
+        it { subject.resolution.should be_nil }
         it { subject.title.should be_eql 'Fix UI detail' }
         it { subject.created_at.should_not be_nil }
         it { subject.updated_at.should_not be_nil }
         it { subject.description.should be_nil }
-        it { subject.requestor.should_not be_nil }
+        it { subject.requestor.should be_nil }
         it { subject.project_id.should be_eql 'be74b643b64e3dc79aa0' }
       end
     end
   end
 
-  it "should be able to create a ticket for a given project" do
-    pending
-    @ticket = @project.ticket!(:title => 'New ticket', :assignee => ['jhon'], :description => 'Ticket description')
-    @ticket.should be_an_instance_of(@klass)
+  describe "Create and Update tickets" do 
+    before(:each) do 
+    end
+
+    context "when calling #ticket! to a project instance" do 
+      subject { project .ticket! :title => 'New Ticket', :assignee => ['john'], :description => 'Ticket description' }
+      it { should be_an_instance_of ticket_class }
+    end
   end
 
   it "should be able to update a ticket" do
+    pending
     @ticket = @project.ticket(@ticket_id)
     @ticket.title = "Hello World"
     @ticket.save.should be_true
   end
 
-  it "should contain all fields for tickets" do 
-    pending
-    ticket = @project.ticket(@ticket_id)
-  end
 end
