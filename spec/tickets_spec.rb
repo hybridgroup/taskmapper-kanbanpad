@@ -85,7 +85,6 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   end
 
   it "should be able to update a ticket" do
-    pending
     @ticket = @project.ticket(@ticket_id)
     @ticket.title = "Hello World"
     @ticket.save.should be_true
@@ -94,5 +93,5 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   it "should contain all fields for tickets" do 
     pending
     ticket = @project.ticket(@ticket_id)
-end
+  end
 end
