@@ -1,37 +1,45 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe TaskMapper::Provider::Kanbanpad::Comment do
-  before(:all) do
-    headers = {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
-    wheaders = headers.merge('Accept' => 'application/json')
-    pheaders = headers.merge("Content-Type" => "application/json")
-    
-    ActiveResource::HttpMock.respond_to do |mock|
-      mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
-      mock.get '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
-      mock.post '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', pheaders, fixture_for('comments/4ef2719bf17365000110df9e'), 200
+  let(:headers) { {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='} }
+  let(:wheaders) { headers.merge('Accept' => 'application/json') }
+  let(:pheaders) { headers.merge("Content-Type" => "application/json") }
+  let(:project_id) { 'be74b643b64e3dc79aa0' }
+  let(:comment_id) { '4d684e6f973c7d5648000009' }
+  let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
+  let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
+
+  describe "Retrieving comments from a project" do 
+    before(:each) do 
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
+      end
     end
-    @project_id = 'be74b643b64e3dc79aa0'
-    @ticket_id = '4cd428c496f0734eef000007'
-    @comment_id = '4d684e6f973c7d5648000009'
+    let(:project) { tm.project project_id }
+
+    context "when calling #comments to a project" do 
+      subject { project.comments } 
+      it { should be_instance_of Array } 
+      it { subject.first.should be_an_instance_of comment_class }
+    end
   end
 
-  before(:each) do
-    @taskmapper = TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js')
-    @project = @taskmapper.project(@project_id)
-    @klass = TaskMapper::Provider::Kanbanpad::Comment
-  end
+  describe "Creating comments to a project" do 
+    before(:each) do 
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
+        mock.post '/projects/be74b643b64e3dc79aa0/comments.json', pheaders, '', 200
+      end
+    end
+    let(:project) { tm.project project_id }
 
-  it "should be able to load all comments" do
-    comments = @project.comments
-    comments.should be_instance_of Array
-    comments.first.should be_instance_of TaskMapper::Provider::Kanbanpad::Comment
+    context "when calling #comment! to a project instance" do 
+      subject { project.comment! :body => 'New Project Comment' }
+      it { should be_an_instance_of comment_class } 
+      it { subject.project_id.should_not be_nil }
+      it { subject.project_id.should be_a String }
+    end
   end
-  
-  it "should be able to create a comment" do
-    comment = @project.comment!(:body => "New Project Comment")
-    comment.should be_an_instance_of(@klass)
-    comment.project_id.should be_a String
-  end
-
 end
