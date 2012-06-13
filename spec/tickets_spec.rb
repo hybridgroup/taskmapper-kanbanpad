@@ -25,7 +25,6 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
     end
     let(:project) { tm.project project_id }
 
-
     context "when calling #tickets on a project instance" do 
       subject { project.tickets } 
       it { should be_an_instance_of Array }
@@ -82,19 +81,27 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
 
   describe "Create and Update tickets" do 
     before(:each) do 
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/projects/be74b643b64e3dc79aa0.json', headers, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.post '/projects/be74b643b64e3dc79aa0/tasks.json', pheaders, '', 200
+        mock.put '/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+      end
     end
+    let(:project) { tm.project project_id }
 
     context "when calling #ticket! to a project instance" do 
-      subject { project .ticket! :title => 'New Ticket', :assignee => ['john'], :description => 'Ticket description' }
+      subject { project.ticket! :title => 'New Ticket', :assignee => ['john'], :description => 'Ticket description' }
       it { should be_an_instance_of ticket_class }
     end
-  end
 
-  it "should be able to update a ticket" do
-    pending
-    @ticket = @project.ticket(@ticket_id)
-    @ticket.title = "Hello World"
-    @ticket.save.should be_true
+    context "when calling #save to a ticket instance and a field is change" do 
+      it "should update the ticket instance in the backend" do 
+        ticket = project.ticket ticket_id 
+        ticket.title = 'Hello World'
+        ticket.save.should be_true
+      end
+    end
   end
-
 end
