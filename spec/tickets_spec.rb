@@ -13,11 +13,10 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   let(:ticket_class) { TaskMapper::Provider::Kanbanpad::Ticket }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
-
   describe "Retrieving tickets" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects/be74b643b64e3dc79aa0.json', headers, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
         mock.get '/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', headers, fixture_for('tasks'), 200
         mock.get '/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', headers, fixture_for('tasks/4cd428c496f0734eef000007'), 200
         mock.get '/projects/be74b643b64e3dc79aa0/tasks/4dc31c4c9bd0ff6c3700004e.json', headers, fixture_for('tasks/4dc31c4c9bd0ff6c3700004e'), 200
@@ -82,7 +81,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   describe "Create and Update tickets" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects/be74b643b64e3dc79aa0.json', headers, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
         mock.get '/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
         mock.get '/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
         mock.post '/projects/be74b643b64e3dc79aa0/tasks.json', pheaders, '', 200
