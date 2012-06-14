@@ -1,11 +1,11 @@
 module TaskMapper::Provider
   # This is the Kanbanpad Provider for taskmapper
-  
+
   module Kanbanpad
     include TaskMapper::Provider::Base
     TICKET_API = KanbanpadAPI::Task
     PROJECT_API = KanbanpadAPI::Project
-    
+
     # This is for cases when you want to instantiate using TaskMapper::Provider::Kanbanpad.new(auth)
     def self.new(auth = {})
       TaskMapper.new(:kanbanpad, auth)

@@ -1,11 +1,23 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "TaskMapper::Provider::Kanbanpad" do
-  
-  it "should be able to instantiate a new instance" do
-    #@ticketmaster = TaskMapper.new(:kanbanpad, {:account => 'ticketmaster', :token => '000000'})
-    #@ticketmaster.should be_an_instance_of(TaskMapper)
-    #@ticketmaster.should be_a_kind_of(TaskMapper::Provider::Kanbanpad)
+  let(:headers) { {"Authorization"=>"Basic eWVzOm5v", "Accept"=>"application/json"} }
+
+  describe "Provider initializer" do 
+    subject { TaskMapper.new :kanbanpad, :username => 'blah', :password => 'let' }
+    it { should_not be_nil }
   end
+
+  describe "Provider credential validation" do 
+    before(:each) do 
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/projects.json', headers, fixture_for('projects'), 200
+      end
+    end
+
+    subject { TaskMapper.new(:kanbanpad, :username => 'yes', :password => 'no').valid? }
+    it { should be_true }
+  end
+
   
 end
