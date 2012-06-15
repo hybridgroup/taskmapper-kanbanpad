@@ -30,7 +30,7 @@ module KanbanpadAPI
   end
 
   class Base < ActiveResource::Base
-    self.site = "http://localhost:4567/"
+    self.site = "http://localhost:9292/"
     self.format = :json
     def self.inherited(base)
       KanbanpadAPI.resources << base

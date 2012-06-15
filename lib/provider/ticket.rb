@@ -51,7 +51,12 @@ module TaskMapper::Provider
       end
 
       def save
-        new? ? to_issue.save  : update
+        if new? 
+          to_issue.save  
+        else
+          puts "here"
+          update
+        end
       end
 
       def new?
@@ -110,7 +115,7 @@ module TaskMapper::Provider
 
       def find_task
         task = KanbanpadAPI::Task.find(id, :params => {:project_id => project_id, :step_id => step_id})
-        raise TicketMaster::Exception.new "Task with #{id} was not found" unless task
+        raise TaskMapper::Exception.new "Task with #{id} was not found" unless task
         task
       end
 
