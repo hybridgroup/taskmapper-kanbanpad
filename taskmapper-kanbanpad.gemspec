@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-kanbanpad"
-  s.version = "0.7.0"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-05-10"
+  s.date = "2012-06-18"
   s.description = "Allows taskmapper to interact with kanbanpad."
   s.email = "sonia@hybridgroup.com"
   s.extra_rdoc_files = [
@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/kanbanpad/kanbanpad-api.rb",
+    "lib/provider/api-extensions.rb",
     "lib/provider/comment.rb",
     "lib/provider/kanbanpad.rb",
     "lib/provider/project.rb",
@@ -62,7 +63,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/hybridgroup/taskmapper-kanbanpad"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.17"
+  s.rubygems_version = "1.8.24"
   s.summary = "taskmapper Provider for Kanbanpad"
 
   if s.respond_to? :specification_version then
@@ -71,7 +72,6 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<taskmapper>, ["~> 0.8"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.1"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
@@ -79,7 +79,6 @@ Gem::Specification.new do |s|
     else
       s.add_dependency(%q<taskmapper>, ["~> 0.8"])
       s.add_dependency(%q<rspec>, ["~> 2.8"])
-      s.add_dependency(%q<bundler>, ["~> 1.1"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_dependency(%q<rcov>, ["~> 1.0"])
@@ -88,7 +87,6 @@ Gem::Specification.new do |s|
   else
     s.add_dependency(%q<taskmapper>, ["~> 0.8"])
     s.add_dependency(%q<rspec>, ["~> 2.8"])
-    s.add_dependency(%q<bundler>, ["~> 1.1"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<simplecov>, ["~> 0.5"])
     s.add_dependency(%q<rcov>, ["~> 1.0"])
