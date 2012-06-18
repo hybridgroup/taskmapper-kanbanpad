@@ -16,10 +16,10 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   describe "Retrieving tickets" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', headers, fixture_for('tasks'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', headers, fixture_for('tasks/4cd428c496f0734eef000007'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0/tasks/4dc31c4c9bd0ff6c3700004e.json', headers, fixture_for('tasks/4dc31c4c9bd0ff6c3700004e'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json?backlog=yes&finished=yes', headers, fixture_for('tasks'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', headers, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4dc31c4c9bd0ff6c3700004e.json', headers, fixture_for('tasks/4dc31c4c9bd0ff6c3700004e'), 200
       end
     end
     let(:project) { tm.project project_id }
@@ -81,11 +81,11 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   describe "Create and Update tickets" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
-        mock.post '/projects/be74b643b64e3dc79aa0/tasks.json', pheaders, '', 200
-        mock.put '/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.post '/api/v1/projects/be74b643b64e3dc79aa0/tasks.json', pheaders, '', 200
+        mock.put '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007.json', pheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
       end
     end
     let(:project) { tm.project project_id }
