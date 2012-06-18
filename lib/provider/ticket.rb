@@ -51,12 +51,7 @@ module TaskMapper::Provider
       end
 
       def save
-        if new? 
-          to_issue.save  
-        else
-          puts "here"
-          update
-        end
+        new? ? to_issue.save : update
       end
 
       def new?
@@ -127,15 +122,5 @@ module TaskMapper::Provider
         KanbanpadAPI::TaskList.new(self)
       end
     end
-
-    class Net::HTTP
-      def send(*args)
-        p "<<< send #{args.inspect}"
-        resp = super
-        p "<<< response #{resp.inspect}"
-        resp
-      end
-    end
-
   end
 end
