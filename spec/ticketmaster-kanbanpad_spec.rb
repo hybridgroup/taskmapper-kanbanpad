@@ -11,7 +11,7 @@ describe "TaskMapper::Provider::Kanbanpad" do
   describe "Provider credential validation" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects.json', headers, fixture_for('projects'), 200
+        mock.get '/api/v1/projects.json', headers, fixture_for('projects'), 200
       end
     end
 
