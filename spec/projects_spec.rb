@@ -10,8 +10,8 @@ describe TaskMapper::Provider::Kanbanpad::Project do
   describe "Retrieving projects" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/projects.json', wheaders, fixture_for('projects'), 200
-        mock.get '/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects.json', wheaders, fixture_for('projects'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       end
     end
 
