@@ -1,4 +1,6 @@
 require 'rspec'
+require 'taskmapper'
+
 RSpec.configure do |config|
   config.color_enabled = true
   config.formatter     = 'documentation'

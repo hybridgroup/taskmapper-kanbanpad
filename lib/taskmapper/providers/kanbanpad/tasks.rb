@@ -1,7 +1,8 @@
 module TaskMapper
   module Providers
     module Kanbanpad
-      VERSION = "2.0.0"
+      module Tasks
+      end
     end
   end
 end

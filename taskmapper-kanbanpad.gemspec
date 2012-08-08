@@ -13,7 +13,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "taskmapper-kanbanpad"
   gem.require_paths = ["lib"]
-  gem.version       = Taskmapper::Providers::Kanbanpad::VERSION
+  gem.version       = TaskMapper::Providers::Kanbanpad::VERSION
   
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "taskmapper", "2.0.0"
 end
