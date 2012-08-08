@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-kanbanpad"
-  s.version = "0.8.0"
+  s.version = "0.8.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-06-18"
+  s.date = "2012-08-08"
   s.description = "Allows taskmapper to interact with kanbanpad."
   s.email = "sonia@hybridgroup.com"
   s.extra_rdoc_files = [
