@@ -1,5 +1,5 @@
 require "faraday"
-require "json"
+require "faraday_middleware"
 
 require_relative "kanbanpad/version"
 require_relative "kanbanpad/projects"
