@@ -64,16 +64,16 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
 
       context "when retrieving a ticket" do 
         subject { project.ticket ticket_id }
-        it { subject.id.should be_eql '4cd428c496f0734eef000007' }
-        it { subject.status.should be_eql 'Finished' }
-        it { subject.priority.should be_eql 'Not Urgent' }
-        it { subject.resolution.should be_nil }
-        it { subject.title.should be_eql 'Fix UI detail' }
-        it { subject.created_at.should_not be_nil }
-        it { subject.updated_at.should_not be_nil }
-        it { subject.description.should be_nil }
-        it { subject.requestor.should be_nil }
-        it { subject.project_id.should be_eql 'be74b643b64e3dc79aa0' }
+        its(:id) { should be_eql '4cd428c496f0734eef000007' }
+        its(:status) { should be_eql 'Finished' }
+        its(:priority) { should be_eql 'Not Urgent' }
+        its(:resolution) { should be_nil }
+        its(:title) { should be_eql 'Fix UI detail' }
+        its(:created_at) { should_not be_nil }
+        its(:updated_at) { should_not be_nil }
+        its(:description) { should be_nil }
+        its(:requestor) { should be_nil }
+        its(:project_id) { should be_eql 'be74b643b64e3dc79aa0' }
       end
     end
   end
