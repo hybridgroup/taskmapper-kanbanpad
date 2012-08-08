@@ -1,8 +1,0 @@
-[
-    {"email":"sonia@g.com", "id":"7e2cad4b3cbe5954950c","slug":"7e2cad4b3cbe5954950c","name":"project1",
-     "wip_limit":"10", "organization_id":"4cd428da96f0734eef000008", "collaborator_ids":"4cd428da96f0734eef000009",
-     "privacy":"0", "created_at":"2011-09-16T12:56:26Z","updated_at":"2011-10-13T16:18:20Z"},
-    {"email":"jhon@g.com", "id":"be74b643b64e3dc79aa0","slug":"be74b643b64e3dc79aa0","name":"project2",
-     "wip_limit":"10", "organization_id":"4cd428da96f0734eef000008", "collaborator_ids":"4cd428da96f0734eef000009",
-     "privacy":"0", "created_at":"2011-09-16T12:56:26Z","updated_at":"2011-10-13T16:18:20Z"}
-]
