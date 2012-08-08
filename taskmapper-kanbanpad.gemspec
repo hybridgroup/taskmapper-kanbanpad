@@ -2,10 +2,10 @@
 require File.expand_path('../lib/taskmapper-kanbanpad/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Omar Rodriguez"]
-  gem.email         = ["omarjavier15@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.authors       = ["Omar Rodriguez", "Cored"]
+  gem.email         = ["omarjavier15@gmail.com", "george.rafael@gmail.com"]
+  gem.description   = %q{This is the provider for interaction with kanbanpad using taskmapper}
+  gem.summary       = %q{This is the provider for interaction with kanbanpad using taskmapper}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "taskmapper-kanbanpad"
   gem.require_paths = ["lib"]
   gem.version       = Taskmapper::Kanbanpad::VERSION
+  
+  gem.add_development_dependency "rspec"
 end
