@@ -15,7 +15,10 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.version       = TaskMapper::Providers::Kanbanpad::VERSION
   
-  s.add_development_dependency "taskmapper", "2.0.0"
+  s.add_dependency "taskmapper", "2.0.0"
+  s.add_dependency "faraday", "0.8.1"
+  s.add_dependency "json" 
+  
   s.add_development_dependency "rspec"
   s.add_development_dependency "guard"
   s.add_development_dependency "guard-rspec"
