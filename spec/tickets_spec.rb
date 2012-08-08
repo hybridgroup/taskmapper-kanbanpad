@@ -74,6 +74,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
         its(:description) { should be_nil }
         its(:requestor) { should be_nil }
         its(:project_id) { should be_eql 'be74b643b64e3dc79aa0' }
+        its(:assignee) { should be_eql 'Rafael George' }
       end
     end
   end

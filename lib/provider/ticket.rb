@@ -31,7 +31,7 @@ module TaskMapper::Provider
       end
 
       def assignee
-        self.assigned_to.blank? ? 'Nobody' : self.assigned_to.first
+        self[:assignee].first.blank? ? 'Nobody' : self[:assignee].first
       end
 
       def project_id
