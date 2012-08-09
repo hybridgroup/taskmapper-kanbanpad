@@ -6,3 +6,6 @@ gemspec
 gem 'taskmapper', 
   :git => "git://github.com/hybridgroup/taskmapper.git", 
   :branch => "2.0"
+
+# To use taskmapper local source
+# gem 'taskmapper', :path => File.expand_path("../taskmapper")
