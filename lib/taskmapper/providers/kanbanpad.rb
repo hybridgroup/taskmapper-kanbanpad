@@ -1,6 +1,7 @@
 require "faraday"
 require "faraday_middleware"
 
+require_relative "middleware/http"
 require_relative "kanbanpad/version"
 require_relative "kanbanpad/projects"
 require_relative "kanbanpad/tasks"
