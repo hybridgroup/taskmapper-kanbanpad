@@ -1,19 +1,29 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/taskmapper-kanbanpad/version', __FILE__)
+require File.expand_path('../lib/taskmapper/providers/kanbanpad/version', __FILE__)
 
-Gem::Specification.new do |gem|
-  gem.authors       = ["Omar Rodriguez", "Cored"]
-  gem.email         = ["omarjavier15@gmail.com", "george.rafael@gmail.com"]
-  gem.description   = %q{This is the provider for interaction with kanbanpad using taskmapper}
-  gem.summary       = %q{This is the provider for interaction with kanbanpad using taskmapper}
-  gem.homepage      = ""
+Gem::Specification.new do |s|
+  s.authors       = ["Omar Rodriguez", "Cored"]
+  s.email         = ["omarjavier15@gmail.com", "george.rafael@gmail.com"]
+  s.description   = %q{This is the provider for interaction with kanbanpad using taskmapper}
+  s.summary       = %q{Kanbanpad TaskMapper provider}
+  s.homepage      = "https://github.com/hybridgroup/taskmapper-kanbanpad"
 
-  gem.files         = `git ls-files`.split($\)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.name          = "taskmapper-kanbanpad"
-  gem.require_paths = ["lib"]
-  gem.version       = Taskmapper::Kanbanpad::VERSION
+  s.files         = `git ls-files`.split($\)
+  s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  s.test_files    = s.files.grep(%r{^(test|spec|features)/})
+  s.name          = "taskmapper-kanbanpad"
+  s.require_paths = ["lib"]
+  s.version       = TaskMapper::Providers::Kanbanpad::VERSION
   
-  gem.add_development_dependency "rspec"
+  s.add_dependency "taskmapper", "2.0.0"
+  s.add_dependency "faraday", "0.8.1"
+  s.add_dependency "faraday_middleware"
+  s.add_dependency "hashie"
+  
+  s.add_development_dependency "rspec"
+  s.add_development_dependency "guard"
+  s.add_development_dependency "guard-rspec"
+  s.add_development_dependency "guard-bundler"
+  s.add_development_dependency "rubygems-bundler"
+  s.add_development_dependency "libnotify"
 end
