@@ -3,8 +3,9 @@ module TaskMapper
     module Middleware
       module HTTP
         def get(url)
-          body = connection.get("#{base_path}#{url}").body
-          return body.map { |e| yield e } if block_given?
+          resp = connection.get("#{base_path}#{url}")
+          body = resp.body
+          return body.map { |e| yield e } if block_given? and resp.success?
           body
         end
         
@@ -14,7 +15,12 @@ module TaskMapper
             c.basic_auth(credentials[:username], credentials[:password])
             c.response :mashify,  :content_type => /\bjson$/
             c.response :json,     :content_type => /\bjson$/
+            c.response :logger if debug
           end
+        end
+        
+        def debug
+          false
         end
       end
     end
