@@ -15,9 +15,9 @@ module TaskMapper
         def search(criteria)
           get('/projects.json').map do |kpp|
             {
-              :name       => kpp["name"],
-              :created_at => Time.new(kpp["created_at"]),
-              :updated_at => Time.new(kpp["updated_at"])
+              :name       => kpp.name,
+              :created_at => Time.new(kpp.created_at),
+              :updated_at => Time.new(kpp.updated_at)
             }
           end
         end

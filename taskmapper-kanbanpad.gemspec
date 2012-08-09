@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
   s.add_dependency "taskmapper", "2.0.0"
   s.add_dependency "faraday", "0.8.1"
   s.add_dependency "faraday_middleware"
+  s.add_dependency "hashie"
   
   s.add_development_dependency "rspec"
   s.add_development_dependency "guard"

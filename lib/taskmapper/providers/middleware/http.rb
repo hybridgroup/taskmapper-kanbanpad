@@ -10,7 +10,8 @@ module TaskMapper
           con = Faraday.new(:url => domain) do |c|
             c.adapter Faraday.default_adapter
             c.basic_auth(credentials[:username], credentials[:password])
-            c.response :json, :content_type => /\bjson$/
+            c.response :mashify,  :content_type => /\bjson$/
+            c.response :json,     :content_type => /\bjson$/
           end
         end
       end

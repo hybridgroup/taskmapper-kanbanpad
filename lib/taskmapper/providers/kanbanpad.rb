@@ -1,5 +1,6 @@
 require "faraday"
 require "faraday_middleware"
+require "hashie/mash"
 
 require_relative "middleware/http"
 require_relative "kanbanpad/version"
