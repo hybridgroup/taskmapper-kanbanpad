@@ -2,6 +2,14 @@ module TaskMapper
   module Providers
     module Middleware
       module HTTP
+        def domain
+          provider_module.domain
+        end
+        
+        def base_path
+          provider_module.base_path
+        end
+        
         def get(url)
           resp = connection.get("#{base_path}#{url}")
           body = resp.body

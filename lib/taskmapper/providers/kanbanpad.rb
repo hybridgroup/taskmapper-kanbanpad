@@ -11,6 +11,13 @@ require_relative "kanbanpad/task_comments"
 module TaskMapper
   module Providers
     module Kanbanpad
+      def self.domain
+        'https://www.kanbanpad.com'
+      end
+        
+      def self.base_path
+        '/api/v1'
+      end
     end
   end
 end

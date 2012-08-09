@@ -4,14 +4,6 @@ module TaskMapper
       module Projects
         include Middleware::HTTP
         
-        def domain
-          'https://www.kanbanpad.com'
-        end
-        
-        def base_path
-          '/api/v1'
-        end
-        
         def search(criteria)
           get('/projects.json') do |kpp|
             {

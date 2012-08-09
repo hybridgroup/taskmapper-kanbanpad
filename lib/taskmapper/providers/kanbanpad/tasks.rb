@@ -3,14 +3,6 @@ module TaskMapper
     module Kanbanpad
       module Tasks
         include Middleware::HTTP
-
-        def domain
-          'https://www.kanbanpad.com'
-        end
-        
-        def base_path
-          '/api/v1'
-        end
         
         def search(criteria)
           get("/projects/#{criteria[:project_id]}/tasks.json") do |task|
