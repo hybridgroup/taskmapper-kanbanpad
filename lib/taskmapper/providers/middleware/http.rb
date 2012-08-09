@@ -3,7 +3,9 @@ module TaskMapper
     module Middleware
       module HTTP
         def get(url)
-          connection.get("#{base_path}#{url}").body
+          body = connection.get("#{base_path}#{url}").body
+          return body.map { |e| yield e } if block_given?
+          body
         end
         
         def connection

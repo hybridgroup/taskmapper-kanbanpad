@@ -13,7 +13,7 @@ module TaskMapper
         end
         
         def search(criteria)
-          get('/projects.json').map do |kpp|
+          get('/projects.json') do |kpp|
             {
               :name       => kpp.name,
               :created_at => Time.new(kpp.created_at),
