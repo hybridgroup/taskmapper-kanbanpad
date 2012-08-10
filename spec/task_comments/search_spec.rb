@@ -19,7 +19,8 @@ describe "Search Tasks" do
     comment.body.should == "testing comments"
     comment.author.should == "<clutch@hybridgroup.com>"
     
-    pending "Check task"
+    comment.task_id.should == task.id
+    comment.task.should == task
     comment.created_at.should be_a Time
     comment.updated_at.should be_a Time
   end

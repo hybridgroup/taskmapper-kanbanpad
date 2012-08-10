@@ -4,9 +4,9 @@ source 'https://rubygems.org'
 gemspec
 gem 'rake'
 
-gem 'taskmapper', 
-  :git => "git://github.com/hybridgroup/taskmapper.git", 
-  :branch => "2.0"
+#gem 'taskmapper', 
+#  :git => "git://github.com/hybridgroup/taskmapper.git", 
+#  :branch => "2.0"
 
 # To use taskmapper local source
-# gem 'taskmapper', :path => File.expand_path("../taskmapper")
+gem 'taskmapper', :path => File.expand_path("../taskmapper")
