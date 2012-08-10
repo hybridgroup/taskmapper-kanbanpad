@@ -7,7 +7,8 @@ module TaskMapper
         def search(criteria)
           get("/projects/#{criteria[:project_id]}/tasks.json") do |task|
             {
-              :id         => task.task_id,
+              :id         => task.id,
+              :project_id => task.project_slug,
               :title      => task.title,
               :requestor  => "Not available",
               :assignee   => task.assigned_to,
