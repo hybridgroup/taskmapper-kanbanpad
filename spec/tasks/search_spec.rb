@@ -14,6 +14,7 @@ describe "Search Tasks" do
     task = tasks[1]
     task.id.should == "4f973612b9b9940f93016b9d"
     task.project_id.should == "4dc893a9ef6bcbc51a07"
+    task.project.should == project
     task.title.should == "testing a new ticket"
     task.requestor.should == "Not available"
     task.assignee.should == []
