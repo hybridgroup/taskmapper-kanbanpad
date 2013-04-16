@@ -31,8 +31,7 @@ end
 
 task :default => :spec
 
-require 'rake/rdoctask' # TODO This produces a warning
-#require 'rdoc/task'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
     version = File.exist?('VERSION') ? File.read('VERSION') : ""
 

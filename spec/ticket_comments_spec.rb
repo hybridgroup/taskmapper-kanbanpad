@@ -10,7 +10,7 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
-  before(:all) do 
+  before(:each) do 
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
@@ -46,6 +46,9 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   describe "Comment creation to a ticket" do 
     before(:each) do 
       ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007/comments.json', wheaders, fixture_for('comments'), 200
         mock.post '/api/v1/projects/be74b643b64e3dc79aa0/steps/4dc312f49bd0ff6c37000040/tasks/4cd428c496f0734eef000007/comments.json', pheaders, '', 200
       end
     end
