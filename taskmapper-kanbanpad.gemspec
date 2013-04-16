@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "taskmapper-kanbanpad"
-  s.version = "0.8.1"
+  s.version = "0.9.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["HybridGroup"]
-  s.date = "2012-08-08"
+  s.date = "2013-04-16"
   s.description = "Allows taskmapper to interact with kanbanpad."
   s.email = "sonia@hybridgroup.com"
   s.extra_rdoc_files = [
@@ -63,21 +63,21 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/hybridgroup/taskmapper-kanbanpad"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "1.8.25"
   s.summary = "taskmapper Provider for Kanbanpad"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<taskmapper>, ["~> 0.8"])
+      s.add_runtime_dependency(%q<taskmapper>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<simplecov>, ["~> 0.5"])
       s.add_development_dependency(%q<rcov>, ["~> 1.0"])
       s.add_development_dependency(%q<rspec>, [">= 1.2.9"])
     else
-      s.add_dependency(%q<taskmapper>, ["~> 0.8"])
+      s.add_dependency(%q<taskmapper>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.8"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<simplecov>, ["~> 0.5"])
@@ -85,7 +85,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, [">= 1.2.9"])
     end
   else
-    s.add_dependency(%q<taskmapper>, ["~> 0.8"])
+    s.add_dependency(%q<taskmapper>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.8"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<simplecov>, ["~> 0.5"])
