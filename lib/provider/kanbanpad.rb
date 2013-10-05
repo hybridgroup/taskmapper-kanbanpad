@@ -29,6 +29,5 @@ module TaskMapper::Provider
         false
       end
     end
-
   end
 end

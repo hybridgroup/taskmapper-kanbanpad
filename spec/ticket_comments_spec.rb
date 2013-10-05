@@ -10,7 +10,7 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
-  before(:each) do 
+  before(:each) do
     ActiveResource::HttpMock.respond_to do |mock|
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
       mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
@@ -20,31 +20,31 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:project) { tm.project project_id }
   let(:ticket) { project.ticket ticket_id }
 
-  describe "Retrieving ticket comments" do 
-    context "when calling #comments to a ticket instance" do 
-      subject { ticket.comments } 
+  describe "Retrieving ticket comments" do
+    context "when calling #comments to a ticket instance" do
+      subject { ticket.comments }
       it { should be_an_instance_of Array }
       it { subject.first.should be_an_instance_of comment_class }
     end
 
-    context "when calling #comments with an array of comments id's" do 
-      subject { ticket.comments [comment_id] } 
-      it { should be_an_instance_of Array } 
-      it { subject.first.should be_an_instance_of comment_class } 
+    context "when calling #comments with an array of comments id's" do
+      subject { ticket.comments [comment_id] }
+      it { should be_an_instance_of Array }
+      it { subject.first.should be_an_instance_of comment_class }
       it { subject.first.id.should be_eql comment_id }
     end
 
-    context "when calling #comments with a hash attributes" do 
-      subject { ticket.comments :id => comment_id } 
+    context "when calling #comments with a hash attributes" do
+      subject { ticket.comments :id => comment_id }
       it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of comment_class } 
-      it { subject.first.id.should be_eql comment_id } 
+      it { subject.first.should be_an_instance_of comment_class }
+      it { subject.first.id.should be_eql comment_id }
     end
 
   end
 
-  describe "Comment creation to a ticket" do 
-    before(:each) do 
+  describe "Comment creation to a ticket" do
+    before(:each) do
       ActiveResource::HttpMock.respond_to do |mock|
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0/tasks/4cd428c496f0734eef000007.json', wheaders, fixture_for('tasks/4cd428c496f0734eef000007'), 200
@@ -53,7 +53,7 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
       end
     end
 
-    context "when calling #comment! to a ticket instance" do 
+    context "when calling #comment! to a ticket instance" do
       subject { ticket.comment! :body => 'New Ticket' }
       it { should be_an_instance_of comment_class }
       it { subject.ticket_id.should_not be_nil }

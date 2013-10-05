@@ -2,15 +2,15 @@ require 'rubygems'
 require 'active_support'
 require 'active_resource'
 
-# Ruby lib for working with the Kanbanpad API's XML interface.  
+# Ruby lib for working with the Kanbanpad API's XML interface.
 # You should set the authentication using your login
-# credentials with HTTP Basic Authentication. 
+# credentials with HTTP Basic Authentication.
 #
 #   using email and user api key
 #   KanbanpadAPI.authenticate('rick@techno-weenie.net', '70b4b722d55387286b817642289392a64d20b25e')
 #
 #
-# This library is a small wrapper around the REST interface.  
+# This library is a small wrapper around the REST interface.
 
 module KanbanpadAPI
   class Error < StandardError; end
@@ -45,18 +45,16 @@ module KanbanpadAPI
   #
   #
   # Finding tickets
-  # 
+  #
   #   project = KanbanpadAPI::Project.find('7e2cad4b3cbe5954950c')
   #   project.tickets
   #
   # Finding finished tickets from project
-  #   
+  #
   #   KanbanpadAPI::Task.finished('7e2cad4b3cbe5954950c')
   #
-
   class Project < Base
-
-    def tasks(slug, options = {}) 
+    def tasks(slug, options = {})
       Task.find(:all, :params => options.update(:project_id => slug, :backlog => 'yes', :finished => 'yes'))
     end
 
@@ -101,7 +99,7 @@ module KanbanpadAPI
   class ProjectComment < Base
     self.site += 'projects/:project_id/'
     self.element_name = 'comment'
-  end 
+  end
 
   class TaskComment < Base
     self.site += 'projects/:project_id/tasks/:task_id'
@@ -121,6 +119,5 @@ module KanbanpadAPI
       prefix_options, query_options = split_options(prefix_options) if query_options.nil?
       "#{prefix(prefix_options)}#{collection_name}.#{format.extension}#{query_string(query_options)}"
     end
-
   end
 end

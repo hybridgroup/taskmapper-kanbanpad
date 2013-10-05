@@ -9,8 +9,8 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
-  describe "Retrieving comments from a project" do 
-    before(:each) do 
+  describe "Retrieving comments from a project" do
+    before(:each) do
       ActiveResource::HttpMock.respond_to do |mock|
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
@@ -18,15 +18,15 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
     end
     let(:project) { tm.project project_id }
 
-    context "when calling #comments to a project" do 
-      subject { project.comments } 
-      it { should be_instance_of Array } 
+    context "when calling #comments to a project" do
+      subject { project.comments }
+      it { should be_instance_of Array }
       it { subject.first.should be_an_instance_of comment_class }
     end
   end
 
-  describe "Creating comments to a project" do 
-    before(:each) do 
+  describe "Creating comments to a project" do
+    before(:each) do
       ActiveResource::HttpMock.respond_to do |mock|
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
         mock.get '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
@@ -35,9 +35,9 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
     end
     let(:project) { tm.project project_id }
 
-    context "when calling #comment! to a project instance" do 
+    context "when calling #comment! to a project instance" do
       subject { project.comment! :body => 'New Project Comment' }
-      it { should be_an_instance_of comment_class } 
+      it { should be_an_instance_of comment_class }
       it { subject.project_id.should_not be_nil }
       it { subject.project_id.should be_a String }
     end

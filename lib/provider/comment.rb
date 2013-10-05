@@ -9,7 +9,7 @@ module TaskMapper::Provider
     class Comment < TaskMapper::Provider::Base::Comment
       # declare needed overloaded methods here
       API = KanbanpadAPI::TaskComment
-      
+
       def initialize(*object)
         if object.first
           object = object.first
@@ -45,7 +45,7 @@ module TaskMapper::Provider
           self[:updated_at]
         end
       end
-      
+
       def created_at
         @updated_at ||= begin
           Time.parse(self[:created_at])
@@ -56,14 +56,13 @@ module TaskMapper::Provider
 
       def self.create(project_id, ticket_id, step_id, *options)
         options.first.merge!(
-                       :project_id => project_id, 
-                       :task_id => ticket_id, 
+                       :project_id => project_id,
+                       :task_id => ticket_id,
                        :step_id => step_id)
         task_comment = KanbanpadAPI::TaskCommentCreator.new(options.first)
         task_comment.save
         self.new task_comment
       end
-
     end
   end
 end
