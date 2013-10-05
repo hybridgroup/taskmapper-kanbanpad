@@ -1,5 +1,10 @@
-require File.dirname(__FILE__) + '/kanbanpad/kanbanpad-api'
+require 'taskmapper'
 
-%w{version kanbanpad ticket project comment api-extensions }.each do |f|
-  require File.dirname(__FILE__) + '/provider/' + f + '.rb';
-end
+require 'kanbanpad/kanbanpad-api'
+
+require "provider/version"
+require "provider/kanbanpad"
+require "provider/ticket"
+require "provider/project"
+require "provider/comment"
+require "provider/api-extensions"
