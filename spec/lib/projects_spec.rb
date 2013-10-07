@@ -1,20 +1,18 @@
 require 'spec_helper'
 
 describe TaskMapper::Provider::Kanbanpad::Project do
-  let(:headers) { {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='} }
-  let(:wheaders) { headers.merge('Accept' => 'application/json') }
   let(:project_id) { 'be74b643b64e3dc79aa0' }
   let(:tm) { create_instance }
   let(:project_class) { TaskMapper::Provider::Kanbanpad::Project }
 
-  describe "Retrieving projects" do
-    before(:each) do
-      ActiveResource::HttpMock.respond_to do |mock|
-        mock.get '/api/v1/projects.json', wheaders, fixture_for('projects'), 200
-        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
-      end
+  before do
+    ActiveResource::HttpMock.respond_to do |mock|
+      mock.get '/api/v1/projects.json', wheaders, fixture_for('projects'), 200
+      mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
     end
+  end
 
+  describe "Retrieving projects" do
     context "when calling #projects on a TaskMapper instance" do
       subject { tm.projects }
       it { should be_an_instance_of Array }

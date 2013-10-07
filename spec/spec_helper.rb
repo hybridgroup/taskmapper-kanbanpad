@@ -16,3 +16,15 @@ end
 def create_instance(u = username, p = password)
   TaskMapper.new(:kanbanpad, :username => u, :password => p)
 end
+
+def headers
+  {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='}
+end
+
+def wheaders
+  headers.merge 'Accept' => 'application/json'
+end
+
+def pheaders
+  headers.merge "Content-Type" => "application/json"
+end
