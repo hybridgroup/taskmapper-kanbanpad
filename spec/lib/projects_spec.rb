@@ -12,31 +12,47 @@ describe TaskMapper::Provider::Kanbanpad::Project do
     end
   end
 
-  describe "Retrieving projects" do
-    context "when calling #projects on a TaskMapper instance" do
-      subject { tm.projects }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of project_class }
+  describe "#projects" do
+    context "without arguments" do
+      let(:projects) { tm.projects }
+
+      it "returns all projects" do
+        expect(projects).to be_an Array
+        expect(projects.first).to be_a project_class
+      end
     end
 
-    context "when calling #projects on a TaskMapper instance with an array of project's id" do
-      subject { tm.projects([project_id]) }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of project_class }
-      it { subject.first.slug.should be_eql project_id }
+    context "with an array of project IDs" do
+      let(:projects) { tm.projects [project_id] }
+
+      it "returns an array of matching projects" do
+        expect(projects).to be_an Array
+        expect(projects.length).to eq 1
+        expect(projects.first).to be_a project_class
+        expect(projects.first.slug).to eq project_id
+      end
     end
 
-    context "when calling #projects on a TaskMapper instance passing a hash of attributes" do
-      subject { tm.projects :slug => project_id }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of project_class }
-      it { subject.first.slug.should be_eql project_id }
-    end
+    context "with a hash containing a project ID" do
+      let(:projects) { tm.projects :slug => project_id }
 
-    context "when calling #project with a project slug" do
-      subject { tm.project project_id }
-      it { should be_an_instance_of project_class }
-      it { subject.slug.should be_eql project_id }
+      it "returns an array of matching projects" do
+        expect(projects).to be_an Array
+        expect(projects.length).to eq 1
+        expect(projects.first).to be_a project_class
+        expect(projects.first.slug).to eq project_id
+      end
+    end
+  end
+
+  describe "#project" do
+    context "with a project ID" do
+      let(:project) { tm.project project_id }
+
+      it "returns the relevant project" do
+        expect(project).to be_a project_class
+        expect(project.slug).to eq project_id
+      end
     end
   end
 end

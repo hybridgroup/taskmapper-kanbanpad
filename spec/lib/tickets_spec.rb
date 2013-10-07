@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe TaskMapper::Provider::Kanbanpad::Ticket do
-  let(:ticket_data) { {:tasks => {:title => 'new ticket'}} }
+describe TaskMapper::Provider::Kanbanpad::Project do
+  let(:ticket_class) { TaskMapper::Provider::Kanbanpad::Ticket }
+  let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
   let(:project_id) { 'be74b643b64e3dc79aa0'}
   let(:ticket_id) { '4cd428c496f0734eef000007'}
   let(:ticket_id_without_note) { '4cd428c496f0734eef000008' }
   let(:ticket_id_without_assignee) { '4dc31c4c9bd0ff6c3700004e' }
   let(:tm) { create_instance }
-  let(:ticket_class) { TaskMapper::Provider::Kanbanpad::Ticket }
-  let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
+  let(:project) { tm.project project_id }
 
   before do
     ActiveResource::HttpMock.respond_to do |mock|
@@ -23,77 +23,91 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
     end
   end
 
-  describe "Retrieving tickets" do
-    let(:project) { tm.project project_id }
+  describe "#tickets" do
+    context "with no arguments" do
+      let(:tickets) { project.tickets }
 
-    context "when calling #tickets on a project instance" do
-      subject { project.tickets }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of ticket_class }
+      it "returns all tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.first).to be_a ticket_class
+      end
     end
 
-    context "when calling #tickets with an array of ticket id's" do
-      subject { project.tickets([ticket_id]) }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of ticket_class }
-      it { subject.first.id.should be_eql ticket_id }
+    context "with an array of ticket IDs" do
+      let(:tickets) { project.tickets [ticket_id] }
+
+      it "returns an array containing the requested tickets" do
+        expect(tickets).to be_an Array
+        expect(tickets.length).to eq 1
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
+      end
     end
 
-    context "when calling #tickets with a hash attributes" do
-      subject { project.tickets :id => ticket_id }
-      it { should be_an_instance_of Array }
-      it { subject.first.should be_an_instance_of ticket_class }
-      it { subject.first.id.should be_eql ticket_id }
-    end
+    context "with an array of ticket IDs" do
+      let(:tickets) { project.tickets :id => ticket_id }
 
-    describe "Retrieve a single ticket" do
-      context "when calling #ticket with a ticket id" do
-        subject { project.ticket ticket_id }
-        it { should be_an_instance_of ticket_class }
-        it { subject.id.should be_eql ticket_id }
-      end
-
-      context "when calling #ticket with a hash attribute" do
-        subject { project.ticket :id => ticket_id }
-        it { should be_an_instance_of ticket_class }
-        it { subject.id.should be_eql ticket_id }
-      end
-
-      context "when retrieving a ticket without assignee" do
-        subject { project.ticket ticket_id_without_assignee }
-        it { subject.assignee.should be_eql 'Nobody' }
-      end
-
-      context "when retrieving a ticket" do
-        subject { project.ticket ticket_id }
-        its(:id) { should be_eql '4cd428c496f0734eef000007' }
-        its(:status) { should be_eql 'Finished' }
-        its(:priority) { should be_eql 'Not Urgent' }
-        its(:resolution) { should be_nil }
-        its(:title) { should be_eql 'Fix UI detail' }
-        its(:created_at) { should_not be_nil }
-        its(:updated_at) { should_not be_nil }
-        its(:description) { should be_nil }
-        its(:requestor) { should be_nil }
-        its(:project_id) { should be_eql 'be74b643b64e3dc79aa0' }
-        its(:assignee) { should be_eql 'Rafael George' }
+      it "returns an array containing the requested ticket" do
+        expect(tickets).to be_an Array
+        expect(tickets.length).to eq 1
+        expect(tickets.first).to be_a ticket_class
+        expect(tickets.first.id).to eq ticket_id
       end
     end
   end
 
-  describe "Create and Update tickets" do
-    let(:project) { tm.project project_id }
+  describe "#ticket" do
+    context "with a ticket ID" do
+      let(:ticket) { project.ticket ticket_id }
 
-    context "when calling #ticket! to a project instance" do
-      subject { project.ticket! :title => 'New Ticket', :assignee => ['john'], :description => 'Ticket description' }
-      it { should be_an_instance_of ticket_class }
+      it "returns the requested ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.id).to eq ticket_id
+      end
     end
 
-    context "when calling #save to a ticket instance and a field is change" do
-      it "should update the ticket instance in the backend" do
-        ticket = project.ticket ticket_id
-        ticket.title = 'Hello World'
-        ticket.save.should be_true
+    context "with a hash of attributes" do
+      let(:ticket) { project.ticket :id => ticket_id }
+
+      it "returns the requested ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.id).to eq ticket_id
+      end
+    end
+
+    describe "a ticket without an assignee" do
+      let(:ticket) { project.ticket ticket_id_without_assignee }
+      it "sets assignee to 'Nobody'" do
+        expect(ticket.assignee).to eq "Nobody"
+      end
+    end
+
+    describe "#save" do
+      let(:ticket) { project.ticket ticket_id }
+
+      it "updates the ticket in Kanbanpad" do
+        ticket.title = "Hello World"
+        expect(ticket.save).to be_true
+        expect(ticket.title).to eq "Hello World"
+      end
+    end
+  end
+
+  describe "#ticket!" do
+    context "with a title, assignee, and description" do
+      let(:ticket) do
+        project.ticket!(
+          :title => "New Ticket",
+          :assignee => ['john'],
+          :description => 'Ticket description'
+        )
+      end
+
+      it "creates a new Ticket" do
+        expect(ticket).to be_a ticket_class
+        expect(ticket.title).to eq "New Ticket"
+        expect(ticket.assignee).to eq "john"
+        expect(ticket[:description]).to eq "Ticket description"
       end
     end
   end

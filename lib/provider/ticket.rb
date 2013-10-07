@@ -85,12 +85,6 @@ module TaskMapper::Provider
         end
       end
 
-      #TODO?
-      def comment
-        warn 'Kanbanpad does not allow find by id of comments. Perhaps you should leave feedback to request it?'
-        nil
-      end
-
       def comment!(*options)
         if options.first.is_a? Hash
           options.first.merge!(:project_id => self.project_id,
