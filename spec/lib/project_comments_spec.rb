@@ -10,6 +10,12 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
   describe "Retrieving comments from a project" do
+    before(:each) do
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
+      end
+    end
     let(:project) { tm.project project_id }
 
     context "when calling #comments to a project" do
@@ -20,6 +26,13 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   end
 
   describe "Creating comments to a project" do
+    before(:each) do
+      ActiveResource::HttpMock.respond_to do |mock|
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0.json', wheaders, fixture_for('projects/be74b643b64e3dc79aa0'), 200
+        mock.get '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', wheaders, fixture_for('comments'), 200
+        mock.post '/api/v1/projects/be74b643b64e3dc79aa0/comments.json', pheaders, '', 200
+      end
+    end
     let(:project) { tm.project project_id }
 
     context "when calling #comment! to a project instance" do
