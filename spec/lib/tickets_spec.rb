@@ -9,7 +9,7 @@ describe TaskMapper::Provider::Kanbanpad::Ticket do
   let(:ticket_id) { '4cd428c496f0734eef000007'}
   let(:ticket_id_without_note) { '4cd428c496f0734eef000008' }
   let(:ticket_id_without_assignee) { '4dc31c4c9bd0ff6c3700004e' }
-  let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
+  let(:tm) { create_instance }
   let(:ticket_class) { TaskMapper::Provider::Kanbanpad::Ticket }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 

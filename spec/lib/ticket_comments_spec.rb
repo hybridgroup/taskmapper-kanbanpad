@@ -7,7 +7,7 @@ describe TaskMapper::Provider::Kanbanpad::Comment do
   let(:project_id) { 'be74b643b64e3dc79aa0' }
   let(:ticket_id) { '4cd428c496f0734eef000007' }
   let(:comment_id) { '4d684e6f973c7d5648000009' }
-  let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
+  let(:tm) { create_instance }
   let(:comment_class) { TaskMapper::Provider::Kanbanpad::Comment }
 
   before(:each) do

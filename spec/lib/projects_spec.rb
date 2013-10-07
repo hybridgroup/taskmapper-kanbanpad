@@ -4,7 +4,7 @@ describe TaskMapper::Provider::Kanbanpad::Project do
   let(:headers) { {'Authorization' => 'Basic YWJjQGcuY29tOmllODIzZDYzanM='} }
   let(:wheaders) { headers.merge('Accept' => 'application/json') }
   let(:project_id) { 'be74b643b64e3dc79aa0' }
-  let(:tm) { TaskMapper.new(:kanbanpad, :username => 'abc@g.com', :password => 'ie823d63js') }
+  let(:tm) { create_instance }
   let(:project_class) { TaskMapper::Provider::Kanbanpad::Project }
 
   describe "Retrieving projects" do
