@@ -1,6 +1,7 @@
 require 'taskmapper-kanbanpad'
 require 'rspec'
 require 'fakeweb'
+require 'cgi'
 
 FakeWeb.allow_net_connect = false
 
