@@ -10,7 +10,7 @@ module TaskMapper::Provider
       #
       # Returns a new Project
       def initialize(*project)
-        project = project.first if project.first
+        project = project.first if project.is_a?(Array)
         @system_data = {:client => project}
         super project
       end
