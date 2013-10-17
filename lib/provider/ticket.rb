@@ -7,16 +7,6 @@ module TaskMapper::Provider
       STEP_API = KanbanpadAPI::Step
       TASK_COMMENT_API = KanbanpadAPI::TaskCommentCreator
 
-      # Public: Creates a new Ticket based on a hash of attributes
-      #
-      # ticket - hash of Ticket attributes to use when creating the new Ticket
-      #
-      # Returns an instance of Ticket
-      def initialize(*ticket)
-        ticket = ticket.first if ticket.is_a?(Array)
-        super ticket
-      end
-
       # Public: Returns the Ticket's Priority based on the 'urgent' attribute
       #
       # Returns a String

@@ -3,16 +3,6 @@ module TaskMapper::Provider
     class Comment < TaskMapper::Provider::Base::Comment
       API = KanbanpadAPI::TaskComment
 
-      # Public: Creates a new Comment based on a Hash of attributes
-      #
-      # comment - hash of Comment attributes
-      #
-      # Returns a new Comment
-      def initialize(*comment)
-        comment = comment.first if comment.is_a?(Array)
-        super comment
-      end
-
       # Public: Gives an updated_at Time for the Comment.
       #
       # Returns a Time object or a string if it couldn't be parsed

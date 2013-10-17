@@ -4,17 +4,6 @@ module TaskMapper::Provider
       API = KanbanpadAPI::Project
       COMMENT_API = KanbanpadAPI::ProjectComment
 
-      # Public: Creates a new Project based on the provided hash
-      #
-      # project - Hash of Project values to use when creating a new Project
-      #
-      # Returns a new Project
-      def initialize(*project)
-        project = project.first if project.is_a?(Array)
-        @system_data = {:client => project}
-        super project
-      end
-
       # Public: Copies one project's tickets/comments onto another
       #
       # project - project whose attributes should be copied onto the caller
